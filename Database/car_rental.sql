@@ -21,6 +21,51 @@ create table users (
     foreign key (role_id) references roles(id)
 );
 
+create table employees (
+    id int not null auto_increment,
+    user_id int,
+    education varchar(200) not null,
+    experience varchar(2000) not null,
+    interests varchar(200) not null,
+    skills varchar(2000) not null,
+    languages varchar(200) not null,
+    portfolio varchar(2000) not null,
+    success varchar(2000) not null,
+    expected_salary float not null,
+    photo text not null,
+    primary key (id),
+    foreign key (user_id) references users(id)
+);
+
+create table employers (
+    id int not null auto_increment,
+    user_id int,
+    company_name varchar(200) not null,
+    company_address varchar(200) not null,
+
+    primary key (id),
+    foreign key (user_id) references users(id)
+);
+
+create table status (
+    id int not null auto_increment,
+    status varchar(30) not null,
+    primary key (id)
+);
+
+create table invitations (
+    id int not null auto_increment,
+    employee_id int,
+    employer_id int,
+    status_id int,
+    call_date date not null,
+    
+    primary key (id),
+    foreign key (employee_id) references employees(id),
+    foreign key (employer_id) references employers(id),
+    foreign key (status_id) references status(id)
+);
+
 create table cars (
 	id int not null auto_increment,
     photo1 text not null,
@@ -46,14 +91,9 @@ create table rentals (
     foreign key (car_id) references cars(id)
 );
 
-create table status (
-    id int not null auto_increment,
-    status varchar(30) not null,
-    primary key (id)
-);
-
 
 insert into roles (role) values ('Pracownik'), ('Pracodawca');
+
 
 
 insert into cars (photo1, photo2, brand, model, fuel_type, price, gearbox, available) values 

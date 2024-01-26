@@ -19,7 +19,7 @@ const CarCard = ({ props }) => {
     to_route(route);
   };
   const photo1 = props.id <= 6 ? `/images/back${props.id}.webp` : props.photo1;
-  const photo2 = props.id <= 6 ? `/images/front${props.id}.webp` : props.photo2;
+  const photo2 = props.id <= 6 ? `/images/front${props.id}.webp` : props.photo1;
   return (
     <div className="vehicle-card">
       <div className="details">
@@ -45,19 +45,19 @@ const CarCard = ({ props }) => {
         <Box p={4}>
           <HStack alignItems="baseline" spacing={"auto"}>
             <Heading size={"md"} fontWeight="600">
-              {props.brand}
+              {props.firstname} {props.lastname}
             </Heading>
             <Heading size={"sm"} fontWeight="600">
-              {props.model}
+              {props.telephone}
             </Heading>
           </HStack>
           <HStack py={3}>
             <Heading size={"md"} fontWeight="600" color="gray.600">
-              ${props.price}
+              ${props.expected_salary}
             </Heading>
             <Text color="gray.400">{t("carCard.perDay")}</Text>
           </HStack>
-          <Button w="full" onClick={() => navigate(`/cars/${props.id}`)}>
+          <Button w="full" onClick={() => navigate(`/employees/${props.id}`)}>
             {t("carCard.rentNow")}
           </Button>
           <Divider borderColor="gray.300" py={3} />

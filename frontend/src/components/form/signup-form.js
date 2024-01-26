@@ -64,6 +64,7 @@ const SignUpForm = () => {
         <FormInput name={t("form.telephone")} type="tel" refe={telephone} />
         <FormInput name={t("form.email")} type="email" refe={email} />
         <FormInput name={t("form.password")} type="password" refe={password} />
+        <label htmlFor="userRoles">{t("form.userRoles")}</label><br/>
         <Select name={t("form.userRoles")} type="select" ref={userRoles}>
           {userRoles.map(role => (
               <option key={role.id} value={role.id}>{role.role}</option>

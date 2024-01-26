@@ -26,7 +26,7 @@ const LoginForm = () => {
         email: email.current.value,
       })
       .then((response) => {
-        const { id, firstname, lastname, telephone, email } =
+        const { id, firstname, lastname, telephone, email, role_id } =
           response.data.data;
 
         console.log(response.data.data);
@@ -48,7 +48,15 @@ const LoginForm = () => {
           localStorage.setItem("telephone", telephone);
           localStorage.setItem("email", email);
           setLoggedIn(true);
-          navigate("/cars");
+
+          // navigate("/cars");
+
+          if (role_id === 1) {
+            navigate("/employees");
+          } else if (role_id === 2) {
+            navigate("/employers");
+          }
+
         } else if (!verifyPassword) {
           showToast(toast, "Wrong password try again.");
         }

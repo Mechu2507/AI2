@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\EmployersController;
 use App\Http\Controllers\RentController;
 use App\Http\Controllers\RoleController;
 
@@ -54,3 +56,6 @@ Route::put('rents/{id}', [RentController::class, 'update']);
 Route::put('users/{id}', [UserController::class, 'update']);
 
 Route::get('roles', [RoleController::class, 'index']);
+
+Route::get('employees', [EmployeesController::class, 'index']);
+Route::get('employers', [EmployersController::class, 'index']);

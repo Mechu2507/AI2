@@ -112,6 +112,7 @@
     "email": "Email",
     "password": "Hasło",
     "createAccount": "Utwórz konto",
+    "userRoles": "Szukasz pracy czy pracownika?",
     "signIn": "Zaloguj się",
     "welcome":"Witamy w Jobwave",
     "loginMessage": "Nie masz konta?",

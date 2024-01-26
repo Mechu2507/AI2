@@ -11,14 +11,14 @@ import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import SearchContext from "../SearchContext";
 
-function BookCars() {
+function CheckEmployees() {
   const { searchResults, setSearchResults } = useContext(SearchContext);
-  const [cars, setCars] = useState();
   const [isLoading, setLoading] = useState(true);
+  const [employees, setEmployees] = useState();
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/cars").then((response) => {
-      setCars(response.data.data);
+    axios.get("http://127.0.0.1:8000/api/employers").then((response) => {
+      setEmployees(response.data.data);
       setLoading(false);
     });
   }, []);
@@ -33,7 +33,7 @@ function BookCars() {
           links={<NavbarLinks />}
           buttons={
             <>
-              <SearchInput type={"cars"} />
+              <SearchInput type={"employees"} />
               <AvatarMenu />
             </>
           }
@@ -47,14 +47,14 @@ function BookCars() {
             py={10}
           >
             {searchResults && searchResults.length > 0
-              ? searchResults.map((car) => (
-                  <GridItem key={car.id} colSpan={1}>
-                    <CarCard props={car} />
+              ? searchResults.map((employee) => (
+                  <GridItem key={employee.id} colSpan={1}>
+                    <CarCard props={employee} />
                   </GridItem>
                 ))
-              : cars.map((car) => (
-                  <GridItem key={car.id} colSpan={1}>
-                    <CarCard props={car} />
+              : employees.map((employee) => (
+                  <GridItem key={employee.id} colSpan={1}>
+                    <CarCard props={employee} />
                   </GridItem>
                 ))}
           </SimpleGrid>
@@ -65,4 +65,4 @@ function BookCars() {
   );
 }
 
-export default BookCars;
+export default CheckEmployees;
