@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\RentController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +52,5 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 Route::put('cars/{id}', [CarController::class, 'update']);
 Route::put('rents/{id}', [RentController::class, 'update']);
 Route::put('users/{id}', [UserController::class, 'update']);
+
+Route::get('roles', [RoleController::class, 'index']);

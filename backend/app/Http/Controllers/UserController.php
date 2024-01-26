@@ -23,7 +23,8 @@ class UserController extends Controller
             'firstname' => 'required|min:2|max:20',
             'lastname' => 'required|min:2|max:20',
             'telephone' => 'required|min:10|max:30',
-            'email' => 'required|email|unique:users'
+            'email' => 'required|email|unique:users',
+            'userRoles' => 'required|'
         ]);
         if ($validated) {
             DB::table('users')->insert([
@@ -31,7 +32,8 @@ class UserController extends Controller
                 'lastname' => $request->input('lastname'),
                 'telephone' => $request->input('telephone'),
                 'email' => $request->input('email'),
-                'password' => $request->input('password')
+                'password' => $request->input('password'),
+                'role_id' => $request->input('userRoles'),
             ]);
         }
     }

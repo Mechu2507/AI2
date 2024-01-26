@@ -3,14 +3,22 @@ create database if not exists car_rental;
 
 use car_rental;
 
+create table roles (
+    id int not null auto_increment,
+    role varchar(30) not null,
+    primary key (id)
+);
+
 create table users (
 	id int not null auto_increment,
     firstname varchar(30) not null,
     lastname varchar(30) not null,
+    role_id int,
     telephone varchar(50) not null,
     email text not null,
     password text not null,
-    primary key (id)
+    primary key (id),
+    foreign key (role_id) references roles(id)
 );
 
 create table cars (
@@ -37,6 +45,16 @@ create table rentals (
     foreign key (user_id) references users(id),
     foreign key (car_id) references cars(id)
 );
+
+create table status (
+    id int not null auto_increment,
+    status varchar(30) not null,
+    primary key (id)
+);
+
+
+insert into roles (role) values ('Pracownik'), ('Pracodawca');
+
 
 insert into cars (photo1, photo2, brand, model, fuel_type, price, gearbox, available) values 
 ('https://cdn.24.co.za/files/Cms/General/d/3089/b1cf3fb0a479438fabf174b092301c29.jpg',

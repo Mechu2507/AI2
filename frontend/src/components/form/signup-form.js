@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { useToast } from "@chakra-ui/react";
+import { useRef , useState, useEffect} from "react";
+import {Select, useToast} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import bcrypt from "bcryptjs";
@@ -19,6 +19,16 @@ const SignUpForm = () => {
   const email = useRef();
   const password = useRef();
   const passwordRegEx = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+  const [userRoles, setUserRoles] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://127.0.0.1:8000/api/roles")
+        .then((response) => {
+          setUserRoles(response.data);
+        }).catch((error) => {
+      console.log(error);
+    } );
+  } , []);
 
   function createUserAcccount(e) {
     e.preventDefault();
@@ -37,6 +47,7 @@ const SignUpForm = () => {
         telephone: telephone.current.value,
         email: email.current.value,
         password: hashedPassword,
+        userRoles: userRoles.current.value,
       })
       .then(() => {
         showToast(toast, "Account created successfully.", "success", "Success");
@@ -53,7 +64,11 @@ const SignUpForm = () => {
         <FormInput name={t("form.telephone")} type="tel" refe={telephone} />
         <FormInput name={t("form.email")} type="email" refe={email} />
         <FormInput name={t("form.password")} type="password" refe={password} />
-
+        <Select name={t("form.userRoles")} type="select" ref={userRoles}>
+          {userRoles.map(role => (
+              <option key={role.id} value={role.id}>{role.role}</option>
+          ))}
+        </Select>
         <FormButton bgColor="btn-secondary" btnText={t("form.createAccount")} />
       </form>
     </div>
