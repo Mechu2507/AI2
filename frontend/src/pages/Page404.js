@@ -21,7 +21,7 @@ export default function NotFound() {
         Page Not Found
       </Text>
       <Text color={"gray.500"} mb={6}>
-        The page you're looking for does not seem to exist
+        Strona którą szukasz nie istnieje.
       </Text>
 
       <Button
@@ -31,7 +31,7 @@ export default function NotFound() {
         variant="solid"
         onClick={() => navigate("/")}
       >
-        Go to Home
+        Powrót do strony głównej
       </Button>
     </Box>
   );

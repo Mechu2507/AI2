@@ -16,7 +16,7 @@ const HomePageImage = () => {
           minW={"600px"}
         ></Box>
         <Image
-          src="assets/images/ford.webp"
+          src="assets/images/praca.jpg"
           top="10vh"
           position="absolute"
           minW={"730px"}

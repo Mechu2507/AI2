@@ -19,7 +19,7 @@ function SignUp() {
             bgColor="bg-secondary"
             route="/login"
             question={t("form.signupMessage")}
-            btnText="Log In"
+            btnText="Zaloguj się"
           />
           <SignUpForm />
         </Card>

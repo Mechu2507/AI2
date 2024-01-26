@@ -8,7 +8,7 @@ const NavbarLinks = () => {
   return (
     <div className="collapse navbar-collapse mt-lg-0 mt-4" id="navbarLinks">
       <Link className="navbar-brand" to="#">
-        Locavo
+        Jobwave
       </Link>
       <ul className="navbar-nav">
         <li className="nav-item mx-2">
@@ -18,7 +18,7 @@ const NavbarLinks = () => {
         </li>
         <li className="nav-item mx-2">
           <Link className="nav-link" to="/cars">
-            {t("navbar.bookCars")}
+            {t("navbar.employers")}
           </Link>
         </li>
         {email === "admin@gmail.com" && (

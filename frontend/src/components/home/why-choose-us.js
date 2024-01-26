@@ -1,7 +1,6 @@
 import { Box, Flex, Stack, chakra } from "@chakra-ui/react";
-import { FaCar } from "react-icons/fa";
 import { BiDollar } from "react-icons/bi";
-import { AiOutlineSchedule } from "react-icons/ai";
+import {AiFillContainer, AiOutlineSchedule} from "react-icons/ai";
 import { BsShieldLock } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 const Feature = (props) => {
@@ -134,7 +133,7 @@ const WhyChooseUs = () => {
             >
               <Feature
                 title={t("whyChooseUs.features.0.title")}
-                icon={<FaCar />}
+                icon={<AiFillContainer  />}
               >
                 {t("whyChooseUs.features.0.description")}
               </Feature>

@@ -43,12 +43,12 @@ const AvatarMenu = () => {
       });
   };
 
-  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [currentLanguage, setCurrentLanguage] = useState("pl");
 
-  const changeLanguage = (language) => {
-    setCurrentLanguage(language);
-    i18n.changeLanguage(language);
-  };
+  // const changeLanguage = (language) => {
+  //   setCurrentLanguage(language);
+  //   i18n.changeLanguage(language);
+  // };
 
   return (
     <Box px={4}>
@@ -77,21 +77,7 @@ const AvatarMenu = () => {
                 </Text>
               </Box>
               <MenuDivider />
-              <MenuItem onClick={() => navigate("/")}>
-                {t("menuList.home")}
-              </MenuItem>
-              <MenuItem
-                onClick={() => changeLanguage("en")}
-                style={{ display: currentLanguage === "en" ? "none" : "block" }}
-              >
-                {t("menuList.english")}
-              </MenuItem>
-              <MenuItem
-                onClick={() => changeLanguage("fr")}
-                style={{ display: currentLanguage === "fr" ? "none" : "block" }}
-              >
-                {t("menuList.french")}
-              </MenuItem>
+
               <MenuItem onClick={() => navigate("/profile")}>
                 {t("menuList.profile")}
               </MenuItem>

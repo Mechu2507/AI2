@@ -135,7 +135,7 @@ const ClientSpeak = () => {
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+                "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-8.jpg"
               }
               name={t("clientSpeak.testimonials.0.name")}
               title={t("clientSpeak.testimonials.0.title")}
@@ -152,7 +152,7 @@ const ClientSpeak = () => {
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+                "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fHww"
               }
               name={t("clientSpeak.testimonials.1.name")}
               title={t("clientSpeak.testimonials.1.title")}
@@ -169,7 +169,7 @@ const ClientSpeak = () => {
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+                "https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-6.jpg"
               }
               name={t("clientSpeak.testimonials.2.name")}
               title={t("clientSpeak.testimonials.2.title")}

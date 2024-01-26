@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-const CarCard = ({ image, carName, model }) => {
+const EmpCard = ({ image, empName, job }) => {
   return (
     <Flex p={30} w="full" alignItems="center" justifyContent="center">
       <Box
@@ -37,10 +37,10 @@ const CarCard = ({ image, carName, model }) => {
             color="gray.800"
             fontWeight="bold"
           >
-            {carName}
+            {empName}
           </Text>
           <chakra.span fontSize="sm" color="gray.700">
-            {model}
+            {job}
           </chakra.span>
         </Box>
       </Box>
@@ -93,9 +93,9 @@ const FeaturedVehicles = () => {
           direction={{ base: "column", md: "row" }}
           spacing={{ base: 10, md: 4, lg: 10 }}
         >
-          <CarCard image="front5.webp" carName="Dacia Dokker" model="2016" />
-          <CarCard image="front2.webp" carName="Dacia Duster" model="2021" />
-          <CarCard image="front1.webp" carName="Renault Clio" model="2019" />
+          <EmpCard image="p2.jpg" empName="Dariusz Grzyb" job="Mechanik" />
+          <EmpCard image="p3.jpg" empName="Dorota Daster" job="Prawnik" />
+          <EmpCard image="p1.jpg" empName="Mateusz Kot" job="Programista" />
         </Stack>
       </Container>
     </Box>

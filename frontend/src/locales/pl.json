@@ -1,0 +1,122 @@
+{
+  "navbar.home": "Strona Główna",
+  "navbar.employers": "Kandydaci",
+  "navbar.dashboard": "Dashboard",
+  "homePageText.spanTitle": "Znajdź pracownika ",
+  "homePageText.title": "i poszerz grono osób w swojej firmie",
+  "homePageText.description": "Wybierz pracownika z listy naszych kandydatów i zaproś go na spotkanie kwalifikacyjne do twojej firmy..",
+  "homePageText.button": "Znajdź pracownika!",
+  "featuredVehicles.title": "Nasi kandydaci",
+  "featuredVehicles.description": "Mamy kandydatów z ponad 10 branż.",
+  "whyChooseUs.title": "Dlaczego wybrać nas?",
+  "whyChooseUs.description": "Posiadamy listę kandydatów z całej Polski, którzy specjalizują się w rozmaitych dziedzinach pracy. Każdy z rekruterów poszukujących kandydatów na pewno znajdzie odpowiedniego człowieka.",
+  "whyChooseUs.features": [
+    {
+      "title": "Szeroka lista pracowników",
+      "description": " Setki użytkowników oczekujących na twoją ofertę pracy."
+    },
+    {
+      "title": "Możliwość darmowego ogłaszania się",
+      "description": "Nie pobieramy żadnych opłat za założenie konta oraz wystawiania swoich ogłoszeń."
+    },
+    {
+      "title": "Łatwe umawianie spotkania",
+      "description": "Dzięki naszej platformie możesz w łatwy sposób umówić się na spotkanie kwalifikacyjne z kandydatem/pracodawcą którym jesteś zainteresowanyS."
+    },
+    {
+      "title": "Wsparcie techniczne naszych pracowników",
+      "description": " W przypadku problemów możesz zgłosić się do naszego wsparcia technicznego. Nasz kilkuosobowy zespół na pewno znajdzie rozwiązanie twojego problemu."
+    }
+  ],
+  "clientSpeak.title": "Co mówią o nas użytkownicy?",
+  "clientSpeak.description": "Użytkownicy, którzy dzięki nam znaleźli pracę.",
+  "clientSpeak.testimonials": [
+    {
+      "heading": "Wspaniały portal",
+      "text": "Nie mogłam znaleźć pracy przez wiele tygodni, 3 dni po opublikowaniu swojego ogłoszenia odezwał się do mnie pierwszy pracodawca. Polecam Jobwave",
+      "name": "Anna Fajna",
+      "title": "Pracownik w firmie Y"
+    },
+    {
+      "heading": "Doskonała strona",
+      "text": "Potrzebowałem pracowników na wielu stanowiskach w swojej firmie. Znalazłem kandydatów na każde z miejsc.",
+      "name": "Jan Szef",
+      "title": "Manager w firmie Z"
+    },
+    {
+      "heading": "Najlepsze oferty",
+      "text": "Świetna strona, doskonali ludzie. Dzięki niej zatrudniliśmy już ponad 10 pracowników",
+      "name": "Mariusz Pietruszka",
+      "title": "Rekruter firmy X"
+    }
+  ],
+  "footer.about": "O Jobwave",
+  "footer.aboutDescription": "Szeroka lista kandydatów, intuicyjna platforma oraz zespół, który chętnie pomoże ci w przypadku problemów.",
+  "footer.company": "Firma",
+  "footer.blog": "Blog",
+  "footer.aboutUs": "O nas",
+  "footer.contactUs": "Kontakt",
+  "footer.legal": "Legal",
+  "footer.cookiesPolicy": "Cookies Policy",
+  "footer.privacyPolicy": "Privacy Policy",
+  "footer.termsOfService": "Terms of Service",
+  "footer.installApp": "Nasza aplikacja",
+  "footer.copyright": "© Copyright. All rights reserved.",
+  "navbarLoginButtons.login": "Zaloguj",
+  "navbarLoginButtons.signup": "Rejestracja",
+  "linkItems.home": "Home",
+  "linkItems.bookCars": "Book Cars",
+  "linkItems.dashboard": "Dashboard",
+  "linkItems.aboutUs": "About Us",
+  "linkItems.termsOfService": "Terms of Service",
+  "menuList.home": "Home",
+  "menuList.profile": "Profil",
+  "menuList.logout": "Wyloguj",
+  "searchInput": "Szukaj ...",
+  "carCard": {
+    "rentNow": "Rent now",
+    "perDay": "/day",
+    "gearbox": "Gearbox",
+    "type": "Type",
+    "available": "Available",
+    "automatic": "automatic",
+    "manuel": "manuel",
+    "petrol": "petrol",
+    "diesel": "diesel",
+    "yes": "yes",
+    "no": "no",
+    "confirmRent": "Confirm rent"
+  },
+  "profile": {
+    "heading": "List of all your rentals",
+    "brand": "Brand",
+    "model": "Model",
+    "type": "Type",
+    "price": "Price",
+    "gearbox": "Gearbox",
+    "rentalDate": "Rental Date",
+    "returnDate": "Return Date",
+    "noData": "No rentals available.",
+    "editProfile": "Edit profile",
+    "modifyProfile": "Modify your profile",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "phoneNumber": "Phone number",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "form": {
+    "firstname": "Imię",
+    "lastname": "Nazwisko",
+    "telephone": "Numer telefonu",
+    "email": "Email",
+    "password": "Hasło",
+    "createAccount": "Utwórz konto",
+    "signIn": "Zaloguj się",
+    "welcome":"Witamy w Jobwave",
+    "loginMessage": "Nie masz konta?",
+    "signupMessage": "Posiadasz już konto?"
+  },
+  "header.greeting": "Hi, Admin",
+  "header.logout": "Wyloguj"
+}
