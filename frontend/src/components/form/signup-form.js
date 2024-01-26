@@ -18,7 +18,7 @@ const SignUpForm = () => {
   const telephone = useRef();
   const email = useRef();
   const password = useRef();
-  const passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  const passwordRegEx = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
   function createUserAcccount(e) {
     e.preventDefault();
