@@ -55,7 +55,9 @@ Route::put('cars/{id}', [CarController::class, 'update']);
 Route::put('rents/{id}', [RentController::class, 'update']);
 Route::put('users/{id}', [UserController::class, 'update']);
 
+
 Route::get('roles', [RoleController::class, 'index']);
 
 Route::get('employees', [EmployeesController::class, 'index']);
+
 Route::get('employers', [EmployersController::class, 'index']);

@@ -17,34 +17,19 @@ create table users (
     telephone varchar(50) not null,
     email text not null,
     password text not null,
+    education varchar(200) null,
+    experience varchar(2000) null,
+    interests varchar(200) null,
+    skills varchar(2000) null,
+    languages varchar(200) null,
+    portfolio varchar(2000) null,
+    successes varchar(2000) null,
+    expected_salary float null,
+    photo text null,
+    company_name varchar(200) null,
+    company_address varchar(200) null,
     primary key (id),
     foreign key (role_id) references roles(id)
-);
-
-create table employees (
-    id int not null auto_increment,
-    user_id int,
-    education varchar(200) not null,
-    experience varchar(2000) not null,
-    interests varchar(200) not null,
-    skills varchar(2000) not null,
-    languages varchar(200) not null,
-    portfolio varchar(2000) not null,
-    success varchar(2000) not null,
-    expected_salary float not null,
-    photo text not null,
-    primary key (id),
-    foreign key (user_id) references users(id)
-);
-
-create table employers (
-    id int not null auto_increment,
-    user_id int,
-    company_name varchar(200) not null,
-    company_address varchar(200) not null,
-
-    primary key (id),
-    foreign key (user_id) references users(id)
 );
 
 create table status (
@@ -55,14 +40,14 @@ create table status (
 
 create table invitations (
     id int not null auto_increment,
-    employee_id int,
-    employer_id int,
+    employees_user_id int,
+    employers_user_id int,
     status_id int,
     call_date date not null,
     
     primary key (id),
-    foreign key (employee_id) references employees(id),
-    foreign key (employer_id) references employers(id),
+    foreign key (employees_user_id) references users(id),
+    foreign key (employers_user_id) references users(id),
     foreign key (status_id) references status(id)
 );
 
@@ -90,7 +75,6 @@ create table rentals (
     foreign key (user_id) references users(id),
     foreign key (car_id) references cars(id)
 );
-
 
 insert into roles (role) values ('Pracownik'), ('Pracodawca');
 
