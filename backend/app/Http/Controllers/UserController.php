@@ -59,6 +59,29 @@ class UserController extends Controller
         return response()->json(['success' => true, 'message' => 'We\'ve found a match', 'data' => $user[0], 'pass' => $password], 200);
     }
 
+    public function complete(Request $request)
+    {
+        $validated = $request->validate([
+            'firstname' => 'required|min:2|max:20',
+            'lastname' => 'required|min:2|max:20',
+            'telephone' => 'required|min:10|max:30',
+
+        ]);
+        if ($validated) {
+            DB::table('users')->insert([
+                'firstname' => $request->input('firstname'),
+                'lastname' => $request->input('lastname'),
+                'telephone' => $request->input('telephone'),
+
+                'role_id' => $request->input('userRoles'),
+            ]);
+        }
+
+
+
+        return response()->json(['message' => 'User created successfully', 'role_id' => $user->role_id], 201);
+    }
+
     public function logout()
     {
         session()->flush();
@@ -69,7 +92,7 @@ class UserController extends Controller
     public function updateProfile(Request $request, $user_id)
     {
         $user = User::find($user_id);
-        
+
         $validated = $request->validate([
             'firstname' => 'required|min:2|max:20',
             'lastname' => 'required|min:2|max:20',
@@ -82,7 +105,7 @@ class UserController extends Controller
         ]);
         $user = User::find($user_id);
         return response()->json(['success' => true, 'message' => 'Profile updated successfully', 'data' => $user]);
-        
+
     }
 
     public function update(Request $request, $id)
