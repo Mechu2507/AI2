@@ -87,6 +87,17 @@
     "no": "no",
     "confirmRent": "Confirm rent"
   },
+  "employeeCard": {
+    "perMonth": "/miesiąc",
+    "moreInfo": "Więcej informacji",
+    "education": "Edukacja",
+    "telephone": "Nr telefonu",
+    "skills": "Umiejętności",
+    "languages": "Języki",
+    "interests": "Zainteresowania",
+    "expectedJob": "Oczekiwana praca"
+
+  },
   "profile": {
     "heading": "List of all your rentals",
     "brand": "Brand",
