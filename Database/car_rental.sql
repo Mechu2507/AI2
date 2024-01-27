@@ -25,6 +25,7 @@ create table users (
     portfolio varchar(2000) null,
     successes varchar(2000) null,
     expected_salary float null,
+    expected_job varchar(20) null,
     photo text null,
     company_name varchar(200) null,
     company_address varchar(200) null,

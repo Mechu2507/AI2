@@ -201,6 +201,7 @@ span {
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         height: 455px;
         width: 330px;
+        overflow: auto;
       }
 }
 
@@ -208,13 +209,12 @@ span {
     
     .vehicle-card .details {
       height: 455px;
-      
     }
   
     .vehicle-card .details:hover {
       -webkit-transition: none;
       transition: none;
-      
+      overflow: auto;
     }
   }
 

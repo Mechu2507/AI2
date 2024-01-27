@@ -18,27 +18,25 @@ const EmployeeCard = ({ props }) => {
     const navigate = (route) => {
         to_route(route);
     };
-    const photo1 = props.id <= 6 ? `/images/back${props.id}.webp` : props.photo1;
-    // const photo2 = props.id <= 6 ? `/images/front${props.id}.webp` : props.photo2;
+
     return (
         <div className="vehicle-card">
             <div className="details">
                 <div className="thumb-gallery">
                     <Box bg="gray.400" w="full" h="full">
-                        <Image
-                            className="first"
-                            objectFit="cover"
-                            h={"215px"}
-                            w={"full"}
-                            src={photo1}
-                        ></Image>
-                        {/*<Image*/}
-                        {/*    className="second"*/}
-                        {/*    objectFit="cover"*/}
-                        {/*    h={"215px"}*/}
-                        {/*    w={"full"}*/}
-                        {/*    src={photo2}*/}
-                        {/*></Image>*/}
+                        {props.photo ? (
+                            <Image
+                                className="first"
+                                objectFit="cover"
+                                h={"215px"}
+                                w={"full"}
+                                src={props.photo}
+                            />
+                        ) : (
+                            <div align={"center"}>
+                                <Text fontSize="lg" color="gray.600" p={4}>Brak zdjęcia</Text>
+                            </div>
+                        )}
                     </Box>
                 </div>
 
@@ -48,51 +46,43 @@ const EmployeeCard = ({ props }) => {
                             {props.firstname} {props.lastname}
                         </Heading>
                         <Heading size={"sm"} fontWeight="600">
-                            {props.telephone}
+                            {props.email}
                         </Heading>
                     </HStack>
                     <HStack py={3}>
                         <Heading size={"md"} fontWeight="600" color="gray.600">
-                            ${props.price}
+                            {props.expected_salary} zł
                         </Heading>
-                        <Text color="gray.400">{t("carCard.perDay")}</Text>
+                        <Text color="gray.400">{t("employeeCard.perMonth")}</Text>
                     </HStack>
                     <Button w="full" onClick={() => navigate(`/cars/${props.id}`)}>
-                        {t("carCard.rentNow")}
+                        {t("employeeCard.moreInfo")}
                     </Button>
                     <Divider borderColor="gray.300" py={3} />
 
-                    <SimpleGrid columns={3} py={4} textAlign="center">
+                    <SimpleGrid columns={1} py={4} textAlign="center">
                         <GridItem>
                             <Heading fontWeight="400" color="gray.400" size="xs">
-                                {t("carCard.gearbox")}
+                                {t("employeeCard.expectedJob")}
                             </Heading>
                             <Text fontWeight="500" color="gray.600">
-                                {props.gearbox === "automatic" || props.gearbox === "manuel"
-                                    ? t(`carCard.${props.gearbox.toLowerCase()}`)
-                                    : props.fuel_type}
+                                {props.expected_job}
                             </Text>
                         </GridItem>
                         <GridItem>
                             <Heading fontWeight="400" color="gray.400" size="xs">
-                                {t("carCard.type")}
+                                {t("employeeCard.education")}
                             </Heading>
                             <Text fontWeight="500" color="gray.600">
-                                {props.fuel_type === "petrol" || props.fuel_type === "diesel"
-                                    ? t(`carCard.${props.fuel_type.toLowerCase()}`)
-                                    : props.fuel_type}
+                                {props.education}
                             </Text>
                         </GridItem>
                         <GridItem>
                             <Heading fontWeight="400" color="gray.400" size="xs">
-                                {t("carCard.available")}
+                                {t("employeeCard.telephone")}
                             </Heading>
                             <Text fontWeight="500" color="gray.600">
-                                {props.available === 1
-                                    ? t("carCard.yes")
-                                    : props.available === 0
-                                        ? t("carCard.no")
-                                        : props.available}
+                                {props.telephone}
                             </Text>
                         </GridItem>
                     </SimpleGrid>
@@ -105,14 +95,3 @@ const EmployeeCard = ({ props }) => {
 };
 
 export default EmployeeCard;
-
-// CarCard.defaultProps = {
-//     img1: "",
-//     img2: "",
-//     brand: "Default brand",
-//     model: "0000",
-//     price: "000",
-//     gearbox: "---",
-//     type: "---",
-//     available: "---",
-// };
