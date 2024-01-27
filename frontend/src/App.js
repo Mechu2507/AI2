@@ -11,6 +11,7 @@ import LoadingSpinner from "./components/ui/loading-spinner";
 import useAuthentication from "./useAuthentication";
 import BookCars from "./pages/BookCarsPage";
 import EmployersView from "./pages/EmployersViewPage";
+import EmployerDetail from "./pages/EmployerDetailPage";
 
 function App() {
   const { isLoggedIn, isLoading } = useAuthentication();
@@ -30,6 +31,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
         <Route path="employers" element={<EmployersView />} />
+        <Route path="employers/:id" element={<EmployerDetail />} />
       </Routes>
     </BrowserRouter>
   );

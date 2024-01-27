@@ -2,7 +2,6 @@ import { Box, GridItem, SimpleGrid, VStack } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/navbar/Navbar";
-import CarCard from "../components/ui/car-card";
 import Footer from "../components/footer";
 import LoadingSpinner from "../components/ui/loading-spinner";
 import SearchInput from "../components/search";

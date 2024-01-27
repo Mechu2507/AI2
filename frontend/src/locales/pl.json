@@ -96,25 +96,21 @@
     "languages": "Języki",
     "interests": "Zainteresowania",
     "expectedJob": "Oczekiwana praca"
-
   },
   "profile": {
-    "heading": "List of all your rentals",
-    "brand": "Brand",
-    "model": "Model",
-    "type": "Type",
-    "price": "Price",
-    "gearbox": "Gearbox",
-    "rentalDate": "Rental Date",
-    "returnDate": "Return Date",
-    "noData": "No rentals available.",
-    "editProfile": "Edit profile",
-    "modifyProfile": "Modify your profile",
-    "firstname": "Firstname",
-    "lastname": "Lastname",
-    "phoneNumber": "Phone number",
-    "cancel": "Cancel",
-    "save": "Save"
+    "perMonth": "/miesiąc",
+    "moreInfo": "Więcej informacji",
+    "education": "Edukacja",
+    "telephone": "Nr telefonu",
+    "skills": "Umiejętności",
+    "languages": "Języki",
+    "interests": "Zainteresowania",
+    "expectedJob": "Oczekiwana praca",
+    "experience": "Doświadczenie",
+    "portfolio": "Portfolio",
+    "successes": "Sukcesy",
+    "expectedSalary": "Oczekiwane wynagrodzenie",
+    "inviteToInterview": "Zaproś na rozmowę"
   },
   "form": {
     "firstname": "Imię",

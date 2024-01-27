@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 
 class EmployersController extends Controller
@@ -16,6 +17,14 @@ class EmployersController extends Controller
 
         return response()->json(['success' => true, 'data' => $users], 200);    
         
+    }
+
+    public function show($id)
+    {
+
+        $users = DB::table('users')->where('id', $id)->get();
+
+        return response()->json(['success' => true, 'data' => $users], 200);
     }
 
 }

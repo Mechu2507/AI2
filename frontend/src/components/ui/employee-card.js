@@ -55,7 +55,7 @@ const EmployeeCard = ({ props }) => {
                         </Heading>
                         <Text color="gray.400">{t("employeeCard.perMonth")}</Text>
                     </HStack>
-                    <Button w="full" onClick={() => navigate(`/cars/${props.id}`)}>
+                    <Button w="full" onClick={() => navigate(`/employers/${props.id}`)}>
                         {t("employeeCard.moreInfo")}
                     </Button>
                     <Divider borderColor="gray.300" py={3} />

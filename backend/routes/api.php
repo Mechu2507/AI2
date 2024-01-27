@@ -61,3 +61,4 @@ Route::get('roles', [RoleController::class, 'index']);
 Route::get('employees', [EmployeesController::class, 'index']);
 
 Route::get('employers', [EmployersController::class, 'index']);
+Route::get('employers/{id}', [EmployersController::class, 'show']);
