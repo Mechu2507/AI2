@@ -111,6 +111,22 @@
     "successes": "Sukcesy",
     "expectedSalary": "Oczekiwane wynagrodzenie",
     "inviteToInterview": "Zaproś na rozmowę"
+    "heading": "List of all your rentals",
+    "brand": "Brand",
+    "model": "Model",
+    "type": "Type",
+    "price": "Price",
+    "gearbox": "Gearbox",
+    "rentalDate": "Rental Date",
+    "returnDate": "Return Date",
+    "noData": "No rentals available.",
+    "editProfile": "Edytuj profil",
+    "modifyProfile": "Edytuj swój profil",
+    "firstname": "Imie",
+    "lastname": "Nazwisko",
+    "phoneNumber": "Numer telefonu",
+    "cancel": "Zamknij",
+    "save": "Zapisz"
   },
   "form": {
     "firstname": "Imię",
@@ -119,12 +135,28 @@
     "email": "Email",
     "password": "Hasło",
     "createAccount": "Utwórz konto",
-    "userRoles": "Szukasz pracy czy pracownika?",
+    "userRoles": "Jesteś pracownikiem czy pracodawcą?",
     "signIn": "Zaloguj się",
     "welcome":"Witamy w Jobwave",
     "loginMessage": "Nie masz konta?",
-    "signupMessage": "Posiadasz już konto?"
+    "signupMessage": "Posiadasz już konto?",
+    "complete": "Uzupełnij informacje o sobie",
+    "job": "Zawód",
+    "education": "Podaj swoje wykształcenie",
+    "experience": "Opisz swoje doświadczenie zawodowe",
+    "interests": "Podaj swoje zainteresowania",
+    "skills": "Podaj swoje umiejętności",
+    "languages": "Wpisz języki, którymi się posługujesz",
+    "portfolio": "Portfolio",
+    "successes": "Opisz swoje osiągnięcia zawodowe",
+    "expectedSalary": "Podaj oczekiwaną przez ciebie pensje",
+    "photo": "Podaj link do  zdjęcia",
+    "completeAccount": "Dodaj informacje",
+    "cname": "Nazwa firmy",
+    "caddress": "Adres firmy"
   },
+
+
   "header.greeting": "Hi, Admin",
   "header.logout": "Wyloguj"
 }

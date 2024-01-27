@@ -62,3 +62,8 @@ Route::get('employees', [EmployeesController::class, 'index']);
 
 Route::get('employers', [EmployersController::class, 'index']);
 Route::get('employers/{id}', [EmployersController::class, 'show']);
+
+Route::get('complete_employer', [UserController::class, 'complete']);
+
+Route::get('complete_employee', [UserController::class, 'complete']);
+
