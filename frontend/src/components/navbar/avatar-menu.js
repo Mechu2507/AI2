@@ -78,7 +78,7 @@ const AvatarMenu = () => {
               </Box>
               <MenuDivider />
 
-              <MenuItem onClick={() => navigate( role_id === "2" ? "/profile_employer" : "/profile")}>
+              <MenuItem onClick={() => navigate( role_id === "2" ? "/employer_profile" : "/profile")}>
   {t("menuList.profile")}
 </MenuItem>
               <MenuDivider />
