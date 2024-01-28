@@ -169,21 +169,40 @@ span {
     position: relative;
   }
 
-  .vehicle-card .details {
-    position: relative;
-    height: 365px;
-    width: 330px;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #fff;
-    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
-  }
+  .vehicle-card .details
+{
+  position: relative;
+  height: auto;
+  width: 330px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
+  max-height: 600px;
+}
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.pagination__link {
+    margin: 0 2px;
+}
+
+.pagination__link--disabled {
+    opacity: 0.3;
+}
+
+.pagination__link--active {
+    font-weight: bold;
+}
 
 @media (min-width: 768px) {
     
       
       .vehicle-card:hover {
-        position: absolute;
+        position: relative;
         z-index: 2;
         -webkit-transform: translate(0px, -10px);
         transform: translate(0, -10px);
@@ -199,7 +218,7 @@ span {
         -webkit-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
         transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        height: 455px;
+        height: auto;
         width: 330px;
         overflow: auto;
       }

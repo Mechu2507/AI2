@@ -10,11 +10,13 @@ import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import SearchContext from "../SearchContext";
 import EmployeeCard from "../components/ui/employee-card";
+import ReactPaginate from 'react-paginate';
 
 function EmployersView() {
     const { searchResults, setSearchResults } = useContext(SearchContext);
     const [isLoading, setLoading] = useState(true);
     const [users, setUsers] = useState();
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/employers").then((response) => {
@@ -24,6 +26,20 @@ function EmployersView() {
     }, []);
 
     if (isLoading) return <LoadingSpinner />;
+
+    const PER_PAGE = 6;
+
+    const offset = currentPage * PER_PAGE;
+
+    const currentPageData = users
+        .slice(offset, offset + PER_PAGE)
+        .map((user) => <EmployeeCard key={user.id} props={user} />);
+
+    const pageCount = Math.ceil(users.length / PER_PAGE);
+
+    function handlePageClick({ selected: selectedPage }) {
+        setCurrentPage(selectedPage);
+    }
 
     return (
         <Box minHeight="100vh" display="flex" flexDirection="column">
@@ -46,18 +62,19 @@ function EmployersView() {
                         columnGap={8}
                         py={10}
                     >
-                        {searchResults && searchResults.length > 0
-                            ? searchResults.map((users) => (
-                                <GridItem key={users.id} colSpan={1}>
-                                    <EmployeeCard props={users} />
-                                </GridItem>
-                            ))
-                            : users.map((user) => (
-                                <GridItem key={user.id} colSpan={1}>
-                                    <EmployeeCard props={user} />
-                                </GridItem>
-                            ))}
+                        {currentPageData}
                     </SimpleGrid>
+                    <ReactPaginate
+                        previousLabel={"Poprzednia"}
+                        nextLabel={"Następna"}
+                        pageCount={pageCount}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        previousLinkClassName={"pagination__link"}
+                        nextLinkClassName={"pagination__link"}
+                        disabledClassName={"pagination__link--disabled"}
+                        activeClassName={"pagination__link--active"}
+                    />
                 </VStack>
             </Box>
             <Footer />

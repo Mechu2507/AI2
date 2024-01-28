@@ -17,7 +17,7 @@ create table users (
     telephone varchar(50) not null,
     email text not null,
     password text not null,
-    education varchar(200) null, --pracownik
+    education varchar(200) null, 
     experience varchar(2000) null,
     interests varchar(200) null,
     skills varchar(2000) null,
@@ -27,8 +27,8 @@ create table users (
     expected_salary float null,
     expected_job varchar(20) null,
     photo text null,
-    company_name varchar(200) null, --pracodawca
-    company_address varchar(200) null, --pracodawca
+    company_name varchar(200) null,
+    company_address varchar(200) null,
     primary key (id),
     foreign key (role_id) references roles(id)
 );
