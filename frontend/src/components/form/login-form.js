@@ -47,6 +47,7 @@ const LoginForm = () => {
           localStorage.setItem("lastname", lastname);
           localStorage.setItem("telephone", telephone);
           localStorage.setItem("email", email);
+          localStorage.setItem("role_id", role_id);
           setLoggedIn(true);
 
          
