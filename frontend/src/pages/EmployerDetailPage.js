@@ -51,80 +51,84 @@ function EmployerDetail() {
             });
     }, [params.id]);
 
-    useEffect(() => {
-        calculatePrice();
-    }, []);
+    // useEffect(() => {
+    //     calculatePrice();
+    // }, []);
 
-    const calculatePrice = () => {
-        const rental_date = Date.parse(rentalDate.current.value);
-        const return_date = Date.parse(returnDate.current.value);
-        const now = new Date().getTime();
-
-        const rentDuration = return_date - rental_date;
-        if (rentalDate.current.value && returnDate.current.value) {
-            if (rental_date < now || return_date < now) {
-                setTotalPrice(0);
-            } else if (rentDuration <= 0) {
-                setTotalPrice(0);
-            } else {
-                const price = (rentDuration / (1000 * 60 * 60 * 24)) * car.price;
-                setTotalPrice(price);
-            }
-        }
-    };
-
-    const handleRentalDateChange = () => {
-        calculatePrice();
-    };
-
-    const handleReturnDateChange = () => {
-        calculatePrice();
-    };
+    // const calculatePrice = () => {
+    //     const rental_date = Date.parse(rentalDate.current.value);
+    //     const return_date = Date.parse(returnDate.current.value);
+    //     const now = new Date().getTime();
+    //
+    //     const rentDuration = return_date - rental_date;
+    //     if (rentalDate.current.value && returnDate.current.value) {
+    //         if (rental_date < now || return_date < now) {
+    //             setTotalPrice(0);
+    //         } else if (rentDuration <= 0) {
+    //             setTotalPrice(0);
+    //         } else {
+    //             const price = (rentDuration / (1000 * 60 * 60 * 24)) * car.price;
+    //             setTotalPrice(price);
+    //         }
+    //     }
+    // };
+    //
+    // const handleRentalDateChange = () => {
+    //     calculatePrice();
+    // };
+    //
+    // const handleReturnDateChange = () => {
+    //     calculatePrice();
+    // };
 
     if (isLoading) return <LoadingSpinner />;
 
-    function rentACar(e) {
-        e.preventDefault();
+    function createInvite(e){
 
-        const rental_date = Date.parse(rentalDate.current.value);
-        const return_date = Date.parse(returnDate.current.value);
-        const now = new Date().getTime();
-        const rentDuration = return_date - rental_date;
-
-        if (rental_date < now || return_date < now) {
-            console.log("Please select a valid rental and return dates.");
-        } else if (rentDuration <= 0) {
-            console.log("You can rent for 1 day at least.");
-        } else {
-            const price = (rentDuration / (1000 * 60 * 60 * 24)) * car.price;
-
-            const rent = {
-                rental_date: rentalDate.current.value,
-                return_date: returnDate.current.value,
-                price: price,
-                user_id: localStorage.getItem("id"),
-                car_id: params.id,
-            };
-            console.log(rent);
-            if (rentalDate.current.value != "" && returnDate.current.value != "") {
-                axios
-                    .post("http://127.0.0.1:8000/api/rents", rent)
-                    .then((response) => {
-                        showToast(
-                            toast,
-                            "Rent created successfully!",
-                            "success",
-                            "Success"
-                        );
-                        navigate("/employers");
-                    })
-                    .catch((error) => {
-                        showToast(toast, "Creating a rent failed", "error", "Error");
-                        console.error("Error creating rent:", error);
-                    });
-            }
-        }
     }
+
+    // function rentACar(e) {
+    //     e.preventDefault();
+    //
+    //     const rental_date = Date.parse(rentalDate.current.value);
+    //     const return_date = Date.parse(returnDate.current.value);
+    //     const now = new Date().getTime();
+    //     const rentDuration = return_date - rental_date;
+    //
+    //     if (rental_date < now || return_date < now) {
+    //         console.log("Please select a valid rental and return dates.");
+    //     } else if (rentDuration <= 0) {
+    //         console.log("You can rent for 1 day at least.");
+    //     } else {
+    //         const price = (rentDuration / (1000 * 60 * 60 * 24)) * car.price;
+    //
+    //         const rent = {
+    //             rental_date: rentalDate.current.value,
+    //             return_date: returnDate.current.value,
+    //             price: price,
+    //             user_id: localStorage.getItem("id"),
+    //             car_id: params.id,
+    //         };
+    //         console.log(rent);
+    //         if (rentalDate.current.value != "" && returnDate.current.value != "") {
+    //             axios
+    //                 .post("http://127.0.0.1:8000/api/rents", rent)
+    //                 .then((response) => {
+    //                     showToast(
+    //                         toast,
+    //                         "Rent created successfully!",
+    //                         "success",
+    //                         "Success"
+    //                     );
+    //                     navigate("/employers");
+    //                 })
+    //                 .catch((error) => {
+    //                     showToast(toast, "Creating a rent failed", "error", "Error");
+    //                     console.error("Error creating rent:", error);
+    //                 });
+    //         }
+    //     }
+    // }
 
     return (
         <>
@@ -249,7 +253,7 @@ function EmployerDetail() {
                             <HStack w={"full"} justify={"space-between"}>
 
                             </HStack>
-                            <Button onClick={rentACar} w={"full"}>
+                            <Button onClick={createInvite} w={"full"}>
                                 {t("profile.inviteToInterview")}
                             </Button>
                         </VStack>
