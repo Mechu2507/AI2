@@ -77,8 +77,6 @@ class UserController extends Controller
             ]);
         }
 
-
-
         return response()->json(['message' => 'User created successfully', 'role_id' => $user->role_id], 201);
     }
 

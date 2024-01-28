@@ -33,7 +33,7 @@ create table users (
     foreign key (role_id) references roles(id)
 );
 
-create table status (
+create table statuses (
     id int not null auto_increment,
     status varchar(30) not null,
     primary key (id)
@@ -79,7 +79,7 @@ create table rentals (
 
 insert into roles (role) values ('Pracownik'), ('Pracodawca');
 
-
+insert into statuses (status) values ('Nowe'), ('Odbyte'), ('Anulowane');
 
 insert into cars (photo1, photo2, brand, model, fuel_type, price, gearbox, available) values 
 ('https://cdn.24.co.za/files/Cms/General/d/3089/b1cf3fb0a479438fabf174b092301c29.jpg',

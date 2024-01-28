@@ -63,7 +63,9 @@ Route::get('employees', [EmployeesController::class, 'index']);
 Route::get('employers', [EmployersController::class, 'index']);
 Route::get('employers/{id}', [EmployersController::class, 'show']);
 
-Route::get('complete_employer', [UserController::class, 'complete']);
+Route::post('invites', [EmployersController::class, 'store']);
+Route::get('/users/{user_id}/invites', [EmployersController::class, 'getUserInvites']);
 
+Route::get('complete_employer', [UserController::class, 'complete']);
 Route::get('complete_employee', [UserController::class, 'complete']);
 
