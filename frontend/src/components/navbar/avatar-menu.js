@@ -24,9 +24,12 @@ const AvatarMenu = () => {
   const email = localStorage.getItem("email");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const to_route = useNavigate();
-  const navigate = (route) => {
-    to_route(route);
-  };
+  // const navigate = (route) => {
+  //   to_route(route);
+  // };
+  const navigate = useNavigate();
+
+  const userid = localStorage.getItem("userid");
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -45,10 +48,6 @@ const AvatarMenu = () => {
 
   const [currentLanguage, setCurrentLanguage] = useState("pl");
 
-  // const changeLanguage = (language) => {
-  //   setCurrentLanguage(language);
-  //   i18n.changeLanguage(language);
-  // };
 
   return (
     <Box px={4}>

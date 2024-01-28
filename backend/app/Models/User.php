@@ -62,4 +62,10 @@ class User extends Authenticatable
 {
     return $this->hasMany(Rent::class);
 }
+
+    public function invites()
+    {
+    return $this->hasMany(Invitation::class);
+    } 
+
 }

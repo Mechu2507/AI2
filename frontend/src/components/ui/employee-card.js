@@ -7,7 +7,7 @@ import {
     Box,
     Divider,
     SimpleGrid,
-    GridItem,
+    GridItem, Spacer, VStack,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -41,14 +41,14 @@ const EmployeeCard = ({ props }) => {
                 </div>
 
                 <Box p={4}>
-                    <HStack alignItems="baseline" spacing={"auto"}>
+                    <VStack spacing={"auto"}>
                         <Heading size={"md"} fontWeight="600">
                             {props.firstname} {props.lastname}
                         </Heading>
                         <Heading size={"sm"} fontWeight="600">
                             {props.email}
                         </Heading>
-                    </HStack>
+                    </VStack>
                     <HStack py={3}>
                         <Heading size={"md"} fontWeight="600" color="gray.600">
                             {props.expected_salary} zł

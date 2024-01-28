@@ -34,13 +34,10 @@ function EmployerDetail() {
     const navigate = (route) => navigation(route);
     let params = useParams();
     const toast = useToast();
-    const [car, setCar] = useState({});
     const [users, setUsers] = useState({});
     const [isLoading, setLoading] = useState(true);
+    const callDate = useRef("");
 
-    const rentalDate = useRef("");
-    const returnDate = useRef("");
-    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
         axios
@@ -51,40 +48,32 @@ function EmployerDetail() {
             });
     }, [params.id]);
 
-    // useEffect(() => {
-    //     calculatePrice();
-    // }, []);
-
-    // const calculatePrice = () => {
-    //     const rental_date = Date.parse(rentalDate.current.value);
-    //     const return_date = Date.parse(returnDate.current.value);
-    //     const now = new Date().getTime();
-    //
-    //     const rentDuration = return_date - rental_date;
-    //     if (rentalDate.current.value && returnDate.current.value) {
-    //         if (rental_date < now || return_date < now) {
-    //             setTotalPrice(0);
-    //         } else if (rentDuration <= 0) {
-    //             setTotalPrice(0);
-    //         } else {
-    //             const price = (rentDuration / (1000 * 60 * 60 * 24)) * car.price;
-    //             setTotalPrice(price);
-    //         }
-    //     }
-    // };
-    //
-    // const handleRentalDateChange = () => {
-    //     calculatePrice();
-    // };
-    //
-    // const handleReturnDateChange = () => {
-    //     calculatePrice();
-    // };
 
     if (isLoading) return <LoadingSpinner />;
 
     function createInvite(e){
-
+        e.preventDefault();
+        const invite = {
+            employers_user_id: localStorage.getItem("id"),
+            employees_user_id: users.id,
+            status_id: 1,
+            call_date: callDate.current.value,
+        };
+        axios
+            .post("http://127.0.0.1:8000/api/invites", invite)
+            .then((response) => {
+                showToast(
+                    toast,
+                    "Invite created successfully!",
+                    "success",
+                    "Success"
+                );
+                navigate("/");
+            })
+            .catch((error) => {
+                showToast(toast, "Creating a invite failed", "error", "Error");
+                console.error("Error creating invite:", error);
+            });
     }
 
     // function rentACar(e) {
@@ -249,6 +238,14 @@ function EmployerDetail() {
 
                             </SimpleGrid>
                             <Divider borderColor="gray.300" py={0} />
+
+                            <FormLabel fontWeight="600" color="gray.600">
+                                {t("profile.callDate")}
+                            </FormLabel>
+                            <Input
+                                type={"date"}
+                                ref={callDate}
+                            />
 
                             <HStack w={"full"} justify={"space-between"}>
 

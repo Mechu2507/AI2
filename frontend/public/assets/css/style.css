@@ -178,7 +178,7 @@ span {
   overflow: hidden;
   background-color: #fff;
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
-  max-height: 600px;
+  max-height: 420px;
 }
   .pagination {
     display: flex;

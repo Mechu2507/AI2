@@ -14,6 +14,7 @@ import EmployersView from "./pages/EmployersViewPage";
 import EmployerDetail from "./pages/EmployerDetailPage";
 import CompleteEmployer from "./pages/Complete_Employer";
 import CompleteEmployee from "./pages/Complete_Employee";
+import EmployerProfile from "./pages/EmployerProfilePage";
 
 function App() {
   const { isLoggedIn, isLoading } = useAuthentication();
@@ -36,6 +37,7 @@ function App() {
         <Route path="employers/:id" element={<EmployerDetail />} />
         <Route path="complete_employer" element={<CompleteEmployer />} />
         <Route path="complete_employee" element={<CompleteEmployee />} />
+        <Route path="employer_profile" element={<EmployerProfile />} />
       </Routes>
     </BrowserRouter>
   );
