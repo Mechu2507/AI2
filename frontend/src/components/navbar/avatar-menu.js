@@ -19,6 +19,7 @@ import { useState } from "react";
 const AvatarMenu = () => {
   const { t } = useTranslation();
   const { i18n } = useTranslation();
+  const role_id = localStorage.getItem('role_id');
   const fullname =
     localStorage.getItem("firstname") + " " + localStorage.getItem("lastname");
   const email = localStorage.getItem("email");
@@ -77,9 +78,9 @@ const AvatarMenu = () => {
               </Box>
               <MenuDivider />
 
-              <MenuItem onClick={() => navigate("/profile")}>
-                {t("menuList.profile")}
-              </MenuItem>
+              <MenuItem onClick={() => navigate( role_id === "2" ? "/profile_employer" : "/profile")}>
+  {t("menuList.profile")}
+</MenuItem>
               <MenuDivider />
               <MenuItem onClick={handleLogout}>{t("menuList.logout")}</MenuItem>
             </MenuList>

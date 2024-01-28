@@ -5,6 +5,7 @@ import Login from "./pages/LoginPage";
 import Home from "./pages/HomePage";
 import Rent from "./pages/RentPage";
 import Profile from "./pages/ProfilePage";
+import ProfileEmployer from "./pages/ProfilePageEmployer";
 import Dashboard from "./pages/DashboardPage";
 import NotFound from "./pages/Page404";
 import LoadingSpinner from "./components/ui/loading-spinner";
@@ -31,6 +32,7 @@ function App() {
         <Route path="cars" element={<BookCars />} />
         <Route path="cars/:id" element={<Rent />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="profile_employer" element={<ProfileEmployer />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
         <Route path="employers" element={<EmployersView />} />
