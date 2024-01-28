@@ -1,5 +1,5 @@
 import { SearchIcon, Icon } from "@chakra-ui/icons";
-import { InputGroup, InputLeftElement, Input, Select } from "@chakra-ui/react";
+import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import SearchContext from "../SearchContext";
 import axios from "axios";
@@ -9,7 +9,6 @@ const SearchInput = ({ type }) => {
   const { t } = useTranslation();
   const { setSearchResults } = useContext(SearchContext);
   const [data, setData] = useState();
-  const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
     let cancelRequest = false;
@@ -54,19 +53,7 @@ const SearchInput = ({ type }) => {
         filteredResults = [];
       }
     }
-
-    // Sort the results
-    if (sortOrder === "asc") {
-      filteredResults.sort((a, b) => (a.brand > b.brand ? 1 : -1));
-    } else {
-      filteredResults.sort((a, b) => (a.brand < b.brand ? 1 : -1));
-    }
-
     setSearchResults(filteredResults);
-  };
-
-  const handleSortOrderChange = (event) => {
-    setSortOrder(event.target.value);
   };
 
   return (
@@ -82,10 +69,6 @@ const SearchInput = ({ type }) => {
         placeholder={t("searchInput")}
         onChange={handleSearch}
       />
-      <Select onChange={handleSortOrderChange}>
-        <option value="asc">Rosnąco</option>
-        <option value="desc">Malejąco</option>
-      </Select>
     </InputGroup>
   );
 };
