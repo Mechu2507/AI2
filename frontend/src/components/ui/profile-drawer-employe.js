@@ -46,21 +46,19 @@ function ProfileDrawer() {
 
   useEffect(() => {
     setFormData({
-      firstname: localStorage.getItem("firstname"),
-      lastname: localStorage.getItem("lastname"),
-      telephone: localStorage.getItem("telephone"),
-      education: localStorage.getItem("education"),
-      experience: localStorage.getItem("experience"),
-      interests: localStorage.getItem("interests"),
-      skills: localStorage.getItem("skills"),
-      languages: localStorage.getItem("languages"),
-      portfolio: localStorage.getItem("portfolio"),
-      successes: localStorage.getItem("successes"),
-      expected_salary: localStorage.getItem("expected_salary"),
-      expected_job: localStorage.getItem("expected_job"),
-      photo: localStorage.getItem("photo"),
-
-
+      firstname: localStorage.getItem("firstname") === "null" ? "" : localStorage.getItem("firstname") || "",
+      lastname: localStorage.getItem("lastname") === "null" ? "" : localStorage.getItem("lastname") || "",
+      telephone: localStorage.getItem("telephone") === "null" ? "" : localStorage.getItem("telephone") || "",
+      education: localStorage.getItem("education") === "null" ? "" : localStorage.getItem("education") || "",
+      experience: localStorage.getItem("experience") === "null" ? "" : localStorage.getItem("experience") || "",
+      interests: localStorage.getItem("interests") === "null" ? "" : localStorage.getItem("interests") || "",
+      skills: localStorage.getItem("skills") === "null" ? "" : localStorage.getItem("skills") || "",
+      languages: localStorage.getItem("languages") === "null" ? "" : localStorage.getItem("languages") || "",
+      portfolio: localStorage.getItem("portfolio") === "null" ? "" : localStorage.getItem("portfolio") || "",
+      successes: localStorage.getItem("successes") === "null" ? "" : localStorage.getItem("successes") || "",
+      expected_salary: localStorage.getItem("expected_salary") === "null" ? "" : localStorage.getItem("expected_salary") || "",
+      expected_job: localStorage.getItem("expected_job") === "null" ? "" : localStorage.getItem("expected_job") || "",
+      photo: localStorage.getItem("photo") === "null" ? "" : localStorage.getItem("photo") || "",
     });
   }, []);
 

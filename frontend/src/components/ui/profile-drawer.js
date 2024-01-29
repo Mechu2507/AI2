@@ -36,11 +36,11 @@ function ProfileDrawer() {
 
   useEffect(() => {
     setFormData({
-      firstname: localStorage.getItem("firstname"),
-      lastname: localStorage.getItem("lastname"),
-      telephone: localStorage.getItem("telephone"),
-      company_name: localStorage.getItem("company_name"),
-      company_address: localStorage.getItem("company_address"),
+      firstname: localStorage.getItem("firstname") === "null" ? "" : localStorage.getItem("firstname") || "",
+      lastname: localStorage.getItem("lastname") === "null" ? "" : localStorage.getItem("lastname") || "",
+      telephone: localStorage.getItem("telephone") === "null" ? "" : localStorage.getItem("telephone") || "",
+      company_name: localStorage.getItem("company_name") === "null" ? "" : localStorage.getItem("company_name") || "",
+      company_address: localStorage.getItem("company_address") === "null" ? "" : localStorage.getItem("company_address") || "",
     });
   }, []);
 
