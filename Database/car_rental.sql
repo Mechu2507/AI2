@@ -49,7 +49,7 @@ create table invitations (
     primary key (id),
     foreign key (employees_user_id) references users(id),
     foreign key (employers_user_id) references users(id),
-    foreign key (status_id) references status(id)
+    foreign key (status_id) references statuses(id)
 );
 
 create table saves(
