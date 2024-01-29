@@ -17,18 +17,18 @@ create table users (
     telephone varchar(50) not null,
     email text not null,
     password text not null,
-    education varchar(200) null, 
-    experience varchar(2000) null,
-    interests varchar(200) null,
-    skills varchar(2000) null,
-    languages varchar(200) null,
-    portfolio varchar(2000) null,
-    successes varchar(2000) null,
+    education varchar(100) null, 
+    experience varchar(500) null,
+    interests varchar(100) null,
+    skills varchar(300) null,
+    languages varchar(100) null,
+    portfolio varchar(500) null,
+    successes varchar(400) null,
     expected_salary float null,
-    expected_job varchar(20) null,
+    expected_job varchar(50) null,
     photo text null,
-    company_name varchar(200) null,
-    company_address varchar(200) null,
+    company_name varchar(50) null,
+    company_address varchar(50) null,
     primary key (id),
     foreign key (role_id) references roles(id)
 );
@@ -50,6 +50,16 @@ create table invitations (
     foreign key (employees_user_id) references users(id),
     foreign key (employers_user_id) references users(id),
     foreign key (status_id) references status(id)
+);
+
+create table saves(
+    id int not null auto_increment,
+    employees_user_id int,
+    employers_user_id int,
+
+    primary key (id),
+    foreign key (employees_user_id) references users(id),
+    foreign key (employers_user_id) references users(id)
 );
 
 create table cars (

@@ -76,48 +76,28 @@ function EmployerDetail() {
             });
     }
 
-    // function rentACar(e) {
-    //     e.preventDefault();
-    //
-    //     const rental_date = Date.parse(rentalDate.current.value);
-    //     const return_date = Date.parse(returnDate.current.value);
-    //     const now = new Date().getTime();
-    //     const rentDuration = return_date - rental_date;
-    //
-    //     if (rental_date < now || return_date < now) {
-    //         console.log("Please select a valid rental and return dates.");
-    //     } else if (rentDuration <= 0) {
-    //         console.log("You can rent for 1 day at least.");
-    //     } else {
-    //         const price = (rentDuration / (1000 * 60 * 60 * 24)) * car.price;
-    //
-    //         const rent = {
-    //             rental_date: rentalDate.current.value,
-    //             return_date: returnDate.current.value,
-    //             price: price,
-    //             user_id: localStorage.getItem("id"),
-    //             car_id: params.id,
-    //         };
-    //         console.log(rent);
-    //         if (rentalDate.current.value != "" && returnDate.current.value != "") {
-    //             axios
-    //                 .post("http://127.0.0.1:8000/api/rents", rent)
-    //                 .then((response) => {
-    //                     showToast(
-    //                         toast,
-    //                         "Rent created successfully!",
-    //                         "success",
-    //                         "Success"
-    //                     );
-    //                     navigate("/employers");
-    //                 })
-    //                 .catch((error) => {
-    //                     showToast(toast, "Creating a rent failed", "error", "Error");
-    //                     console.error("Error creating rent:", error);
-    //                 });
-    //         }
-    //     }
-    // }
+    function saveForLater(e){
+        e.preventDefault();
+        const saved = {
+            employers_user_id: localStorage.getItem("id"),
+            employees_user_id: users.id,
+        };
+        axios
+            .post("http://127.0.0.1:8000/api/saved", saved)
+            .then((response) => {
+                showToast(
+                    toast,
+                    "Saved successfully!",
+                    "success",
+                    "Success"
+                );
+                navigate("/");
+            })
+            .catch((error) => {
+                showToast(toast, "Saving failed", "error", "Error");
+                console.error("Error saving:", error);
+            });
+    }
 
     return (
         <>
@@ -126,6 +106,7 @@ function EmployerDetail() {
                 links={<NavbarLinks />}
                 buttons={<AvatarMenu />}
             />
+            <Spacer h={"15vh"} />
             <Center h={"100vh"} m={["5%", "10%", "12%", "13%", "0%"]}>
                 <Stack
                     direction={{ base: "column", lg: "row" }}
@@ -158,6 +139,11 @@ function EmployerDetail() {
                                     <Text fontWeight="600" color="gray.600">
                                         {users.telephone}
                                     </Text>
+                                </GridItem>
+                                <GridItem>
+                                    <Button onClick={saveForLater} w={"full"}>
+                                        {t("profile.saveForLater")}
+                                    </Button>
                                 </GridItem>
                             </SimpleGrid>
 

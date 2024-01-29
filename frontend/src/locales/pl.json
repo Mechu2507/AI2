@@ -128,7 +128,18 @@
     "save": "Zapisz",
     "company_name": "Nazwa firmy",
     "company_address": "Adres firmy",
-    "photo": "Wstaw swoje zdjęcie (link)"
+    "photo": "Wstaw swoje zdjęcie (link)",
+    "archives": "Archiwum",
+    "action": "Akcja",
+    "completed": "Zakończone",
+    "canceled": "Anulowane",
+    "inviteStatusUpdated": "Status zaproszenia został zaktualizowany",
+    "inviteStatusNotUpdated": "Status zaproszenia nie został zaktualizowany",
+    "emptyArchive": "Brak archiwalnych zaproszeń",
+    "saveForLater": "Zapisz na później",
+    "forLater": "Zapisane na później",
+    "emptyForLater": "Brak zapisanych na później zaproszeń"
+
   },
   "form": {
     "firstname": "Imię",

@@ -65,6 +65,10 @@ Route::get('employers/{id}', [EmployersController::class, 'show']);
 
 Route::post('invites', [EmployersController::class, 'store']);
 Route::get('/users/{user_id}/invites', [EmployersController::class, 'getUserInvites']);
+Route::get('/users/{user_id}/archives', [EmployersController::class, 'getUserArchives']);
+Route::put('invites/{id}/update-status', [EmployersController::class, 'updateStatus']);
+Route::post('saved', [EmployersController::class, 'save']);
+Route::get('/forlater/{employers_user_id}', [EmployersController::class, 'forlater']);
 
 Route::get('complete_employer', [UserController::class, 'complete']);
 Route::get('complete_employee', [UserController::class, 'complete']);

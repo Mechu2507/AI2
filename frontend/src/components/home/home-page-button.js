@@ -10,7 +10,7 @@ const HomePageButton = () => {
   };
   return (
     <Button
-      onClick={() => navigate("/cars")}
+      onClick={() => navigate("/employers")}
       _hover={{
         opacity: "0.9",
       }}
