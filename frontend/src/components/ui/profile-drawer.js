@@ -11,23 +11,27 @@ import {
   Box,
   FormLabel,
   Input,
-  useDisclosure,
+  useToast, useDisclosure,
 } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import {showToast} from "../toast-alert";
 
 function ProfileDrawer() {
   const { t } = useTranslation();
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = React.useRef();
+  const firstField = useRef();
   const user_id = localStorage.getItem("id");
 
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
     telephone: "",
+    company_name: "",
+    company_address: "",
   });
 
   useEffect(() => {
@@ -35,6 +39,8 @@ function ProfileDrawer() {
       firstname: localStorage.getItem("firstname"),
       lastname: localStorage.getItem("lastname"),
       telephone: localStorage.getItem("telephone"),
+      company_name: localStorage.getItem("company_name"),
+      company_address: localStorage.getItem("company_address"),
     });
   }, []);
 
@@ -46,12 +52,21 @@ function ProfileDrawer() {
     axios
       .put(`http://127.0.0.1:8000/api/user/${user_id}`, formData)
       .then((response) => {
-        console.log(response.data);
         const updatedUser = response.data.data;
-        localStorage.setItem("firstname", updatedUser.firstname);
-        localStorage.setItem("lastname", updatedUser.lastname);
-        localStorage.setItem("telephone", updatedUser.telephone);
-        onClose();
+        if (updatedUser) {
+          showToast(
+            toast,
+            "Dane zostały pomyślnie zaktualizowane.",
+            "success",
+            "Success"
+          );
+          localStorage.setItem("firstname", updatedUser.firstname);
+          localStorage.setItem("lastname", updatedUser.lastname);
+          localStorage.setItem("telephone", updatedUser.telephone);
+          localStorage.setItem("company_name", updatedUser.company_name);
+          localStorage.setItem("company_address", updatedUser.company_address);
+          onClose();
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -117,6 +132,28 @@ function ProfileDrawer() {
                   id="telephone"
                   name="telephone"
                   value={formData.telephone}
+                  onChange={handleChange}
+                />
+              </Box>
+               <Box>
+                <FormLabel htmlFor="company_name">
+                  {t("profile.company_name")}
+                </FormLabel>
+                <Input
+                  id="company_name"
+                  name="company_name"
+                  value={formData.company_name}
+                  onChange={handleChange}
+                />
+              </Box>
+               <Box>
+                <FormLabel htmlFor="company_address">
+                  {t("profile.company_address")}
+                </FormLabel>
+                <Input
+                  id="company_address"
+                  name="company_address"
+                  value={formData.company_address}
                   onChange={handleChange}
                 />
               </Box>

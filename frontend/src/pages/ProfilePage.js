@@ -15,7 +15,7 @@ import {
   Divider,
   Text,
 } from "@chakra-ui/react";
-import ProfileDrawer from "../components/ui/profile-drawer";
+import ProfileDrawer from "../components/ui/profile-drawer-employe";
 import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import AvatarMenu from "../components/navbar/avatar-menu";

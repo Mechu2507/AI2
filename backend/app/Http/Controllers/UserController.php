@@ -77,6 +77,8 @@ class UserController extends Controller
             ]);
         }
 
+
+
         return response()->json(['message' => 'User created successfully', 'role_id' => $user->role_id], 201);
     }
 
@@ -94,17 +96,49 @@ class UserController extends Controller
         $validated = $request->validate([
             'firstname' => 'required|min:2|max:20',
             'lastname' => 'required|min:2|max:20',
-            'telephone' => 'required|min:10|max:30',
+            'telephone' => 'required|regex:/^[0-9]{9,12}$/',
+            'company_name' => 'max:50',
+            'company_address' => 'max:50',
+            'education' => 'max:50',
+            'experience' => 'max:2000',
+            'interests' => 'max:200',
+            'skills' => 'max:2000',
+            'languages' => 'max:50',
+            'portfolio' => 'max:2000',
+            'successes' => 'max:50',
+            'expected_salary' => 'numeric',
+            'expected_job' => 'max:50',
+            'photo' => 'max:50',
+
+
         ]);
         DB::table('users')->where('id', $user_id)->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'telephone' => $request->telephone,
+            'company_name' => $request->company_name,
+            'company_address' => $request->company_address,
+            'education' => $request->education,
+            'experience' => $request->experience,
+            'interests' => $request->interests,
+            'skills' => $request->skills,
+            'languages' => $request->languages,
+            'portfolio' => $request->portfolio,
+            'successes' => $request->successes,
+            'expected_salary' => $request->expected_salary,
+            'expected_job' => $request->expected_job,
+            'photo' => $request->photo,
+
+
+
         ]);
         $user = User::find($user_id);
         return response()->json(['success' => true, 'message' => 'Profile updated successfully', 'data' => $user]);
 
     }
+
+
+
 
     public function update(Request $request, $id)
     {
@@ -114,14 +148,18 @@ class UserController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'telephone' => 'required',
-            'email' => 'required',
+            'company_name' => 'required',
+            'company_address' => 'required',
+
         ]);
 
         DB::table('users')->where('id', $id)->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'telephone' => $request->telephone,
-            'email' => $request->email,
+            'company_name' => $request->company_name,
+            'company_address' => $request->company_address,
+
         ]);
 
         return response()->json([

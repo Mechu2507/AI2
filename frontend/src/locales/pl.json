@@ -100,7 +100,7 @@
   "profile": {
     "perMonth": "/miesiąc",
     "moreInfo": "Więcej informacji",
-    "education": "Edukacja",
+    "education": "Ukończone szkoły",
     "telephone": "Nr telefonu",
     "email": "Email",
     "skills": "Umiejętności",
@@ -125,7 +125,10 @@
     "lastname": "Nazwisko",
     "phoneNumber": "Numer telefonu",
     "cancel": "Zamknij",
-    "save": "Zapisz"
+    "save": "Zapisz",
+    "company_name": "Nazwa firmy",
+    "company_address": "Adres firmy",
+    "photo": "Wstaw swoje zdjęcie (link)"
   },
   "form": {
     "firstname": "Imię",

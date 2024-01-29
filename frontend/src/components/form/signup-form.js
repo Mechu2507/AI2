@@ -36,7 +36,7 @@ const SignUpForm = () => {
     if (!password.current.value.match(passwordRegEx))
       return showToast(
         toast,
-        "Password must be minimum 8 characters, at least 1 letter and 1 number."
+        "Hasło musi mieć przynajmniej 8 znaków, w tym 1 lietra i 1 cyfra."
       );
 
     const hashedPassword = bcrypt.hashSync(password.current.value);
@@ -50,12 +50,9 @@ const SignUpForm = () => {
         userRoles: userRoles.current.value,
       })
       .then(() => {
-        showToast(toast, "Account created successfully.", "success", "Success");
-        if (userRoles === "Pracownik") {
-          navigate("/complete_employee");
-        } else if (userRoles === "Pracodawca") {
-          navigate("/complete_employer");
-        }
+        showToast(toast, "Konto utworzone pomyślnie.", "success", "Success");
+
+          navigate("/");
       })
       .catch((error) => showToast(toast, error.response.data.message));
   }

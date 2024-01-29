@@ -13,8 +13,6 @@ import useAuthentication from "./useAuthentication";
 import BookCars from "./pages/BookCarsPage";
 import EmployersView from "./pages/EmployersViewPage";
 import EmployerDetail from "./pages/EmployerDetailPage";
-import CompleteEmployer from "./pages/Complete_Employer";
-import CompleteEmployee from "./pages/Complete_Employee";
 import EmployerProfile from "./pages/EmployerProfilePage";
 
 function App() {
@@ -37,8 +35,6 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="employers" element={<EmployersView />} />
         <Route path="employers/:id" element={<EmployerDetail />} />
-        <Route path="complete_employer" element={<CompleteEmployer />} />
-        <Route path="complete_employee" element={<CompleteEmployee />} />
         <Route path="employer_profile" element={<EmployerProfile />} />
       </Routes>
     </BrowserRouter>

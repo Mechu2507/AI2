@@ -26,7 +26,7 @@ const LoginForm = () => {
         email: email.current.value,
       })
       .then((response) => {
-        const { id, firstname, lastname, telephone, email, role_id } =
+        const { id, firstname, lastname, telephone, email, role_id, company_name, company_address, education, experience, interests, skills, languages, portfolio, successes, expected_salary, expected_job, photo } =
           response.data.data;
 
         console.log(response.data.data);
@@ -37,7 +37,7 @@ const LoginForm = () => {
         if (verifyPassword) {
           showToast(
             toast,
-            "You've logged in successfully.",
+            "Zostałeś pomyślnie zalogowany.",
             "success",
             "Success"
           );
@@ -48,6 +48,19 @@ const LoginForm = () => {
           localStorage.setItem("telephone", telephone);
           localStorage.setItem("email", email);
           localStorage.setItem("role_id", role_id);
+          localStorage.setItem("company_name",company_name);
+          localStorage.setItem("company_address",company_address);
+          localStorage.setItem("education",education);
+          localStorage.setItem("experience",experience);
+          localStorage.setItem("interests",interests);
+          localStorage.setItem("skills",skills);
+          localStorage.setItem("languages",languages);
+          localStorage.setItem("portfolio",portfolio);
+          localStorage.setItem("successes",successes);
+          localStorage.setItem("expected_salary",expected_salary);
+          localStorage.setItem("expected_job",expected_job);
+          localStorage.setItem("photo",photo);
+
           setLoggedIn(true);
 
          
@@ -59,7 +72,7 @@ const LoginForm = () => {
           }
 
         } else if (!verifyPassword) {
-          showToast(toast, "Wrong password try again.");
+          showToast(toast, "Błędne hasło. Spróbuj ponownie.");
         }
       })
       .catch((e) => {
