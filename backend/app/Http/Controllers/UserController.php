@@ -108,7 +108,7 @@ class UserController extends Controller
             'successes' => 'max:50',
             'expected_salary' => 'numeric',
             'expected_job' => 'max:50',
-            'photo' => 'max:50',
+            'photo' => 'max:200',
 
 
         ]);
