@@ -33,42 +33,12 @@ const Footer = () => {
       borderColor={"gray.300"}
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
+        <SimpleGrid columns={{ base: 1, sm: 1, md: 1 }} spacing={8}>
           <Stack align={"flex-start"} px={{ base: 0, sm: 0, md: 10 }}>
             <ListHeader>{t("footer.about")}</ListHeader>
             <Text fontSize="sm">{t("footer.aboutDescription")}</Text>
           </Stack>
-          <Stack align={"flex-start"} pl={{ base: 0, sm: 0, md: 10 }}>
-            <ListHeader>{t("footer.company")}</ListHeader>
-            <Link href={"#"}>{t("footer.blog")}</Link>
-            <Link href={"#"}>{t("footer.aboutUs")}</Link>
-            <Link href={"#"}>{t("footer.contactUs")}</Link>
-          </Stack>
 
-          <Stack align={"flex-start"}>
-            <ListHeader>{t("footer.legal")}</ListHeader>
-            <Link href={"#"}>{t("footer.cookiesPolicy")}</Link>
-            <Link href={"#"}>{t("footer.privacyPolicy")}</Link>
-            <Link href={"#"}>{t("footer.termsOfService")}</Link>
-          </Stack>
-
-          <Stack align={"flex-start"}>
-            <ListHeader>{t("footer.installApp")}</ListHeader>
-            <Image
-              src="images/appstore.png"
-              alt="Download on the App Store"
-              boxSize="130px"
-              height="100%"
-              objectFit="contain"
-            />
-            <Image
-              src="images/playstore.png"
-              alt="Get it on Google Play"
-              boxSize="130px"
-              height="100%"
-              objectFit="contain"
-            />
-          </Stack>
         </SimpleGrid>
       </Container>
       <Container

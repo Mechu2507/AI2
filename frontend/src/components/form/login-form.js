@@ -66,7 +66,7 @@ const LoginForm = () => {
          
 
           if (role_id === 1) {
-            navigate("/employees");
+            navigate("/profile");
           } else if (role_id === 2) {
             navigate("/employers");
           }
