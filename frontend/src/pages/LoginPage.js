@@ -4,9 +4,7 @@ import Card from "../components/form/card";
 import SubCard from "../components/form/sub-card";
 import LoginForm from "../components/form/login-form";
 import { useTranslation } from "react-i18next";
-import HomeSidebarContent from "../components/home/home-sidebar-content";
-import NavbarLinks from "../components/navbar/NavbarLinks";
-import NavbarLoginButtons from "../components/navbar/login-buttons";
+
 
 function Login() {
   const { t } = useTranslation();

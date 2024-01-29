@@ -6,7 +6,6 @@ import Footer from "../components/footer";
 import LoadingSpinner from "../components/ui/loading-spinner";
 import SearchInput from "../components/search";
 import AvatarMenu from "../components/navbar/avatar-menu";
-import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import SearchContext from "../SearchContext";
 import EmployeeCard from "../components/ui/employee-card";
@@ -45,7 +44,7 @@ function EmployersView() {
         <Box minHeight="100vh" display="flex" flexDirection="column">
             <Box flexGrow={1}>
                 <Navbar
-                    sidebarContent={<HomeSidebarContent />}
+
                     links={<NavbarLinks />}
                     buttons={
                         <>

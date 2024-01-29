@@ -24,7 +24,6 @@ import { showToast } from "../components/toast-alert";
 import { useTranslation } from "react-i18next";
 import Navbar from "../components/navbar/Navbar";
 import AvatarMenu from "../components/navbar/avatar-menu";
-import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 
 function EmployerDetail() {
@@ -102,7 +101,6 @@ function EmployerDetail() {
     return (
         <>
             <Navbar
-                sidebarContent={<HomeSidebarContent />}
                 links={<NavbarLinks />}
                 buttons={<AvatarMenu />}
             />

@@ -10,7 +10,6 @@ import AvatarMenu from "../components/navbar/avatar-menu";
 import useAuthentication from "../useAuthentication";
 import WhyChooseUs from "../components/home/why-choose-us";
 import FeaturedVehicles from "../components/home/featured-vehicles";
-import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import { useEffect, useState } from "react";
 
@@ -28,7 +27,7 @@ function Home() {
   return (
     <>
       <Navbar
-        sidebarContent={<HomeSidebarContent />}
+
         links={<NavbarLinks />}
         buttons={
           showNavbarContent &&
