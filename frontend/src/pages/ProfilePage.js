@@ -13,7 +13,7 @@ import {
   Heading,
   Spacer,
   Divider,
-  Text,
+  Text, Button, Link, SimpleGrid,
 } from "@chakra-ui/react";
 import ProfileDrawer from "../components/ui/profile-drawer-employe";
 import HomeSidebarContent from "../components/home/home-sidebar-content";
@@ -23,20 +23,43 @@ import Navbar from "../components/navbar/Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import EmployeeCard from "../components/ui/employee-card";
+
 
 function Profile() {
   const { t } = useTranslation();
   const user_id = localStorage.getItem("id");
-  const [rents, setRents] = useState([]);
+  const [invites, setInvites] = useState([]);
+  const [archives, setArchives] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const updateInviteStatus = (inviteid, statusId) => {
+      axios
+          .put(`http://127.0.0.1:8000/api/invites/${inviteid}/update-status`, {status_id: statusId})
+          .then((response) => {
+                  console.log(response, t("profile.inviteStatusUpdated"));
+                  window.location.reload();
+              })
+          .catch((error) => {
+                  console.log(error, t("profile.inviteStatusNotUpdated"));
+          });
+
+
+  }
 
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/api/users/${user_id}/rents`)
-      .then((response) => {
-        setRents(response.data.data);
-      });
+      axios
+          .get(`http://127.0.0.1:8000/api/users/${user_id}/invites`)
+          .then((response) => {
+              setInvites(response.data.data);
+          });
   }, []);
-
+  const PER_PAGE = 3;
+  const offset = currentPage * PER_PAGE;
+  const currentPageData = users
+        .slice(offset, offset + PER_PAGE)
+        .map((user) => <EmployeeCard key={user.id} props={user} />);
   return (
     <>
       <Navbar
@@ -55,43 +78,48 @@ function Profile() {
             <Divider my={5} />
 
             <TableContainer>
-              <Table variant="striped" size={["md", "md", "lg"]}>
-                <Thead>
-                  <Tr>
-                    <Th>{t("profile.brand")}</Th>
-                    <Th>{t("profile.model")}</Th>
-                    <Th>{t("profile.type")}</Th>
-                    <Th>{t("profile.price")}</Th>
-                    <Th>{t("profile.gearbox")}</Th>
-                    <Th>{t("profile.rentalDate")}</Th>
-                    <Th>{t("profile.returnDate")}</Th>
-                  </Tr>
-                </Thead>
-                {rents.length === 0 ? (
-                  <Tbody>
-                    <Tr>
-                      <Td colSpan={7}>
-                        <Text textAlign="center">{t("profile.noData")}</Text>
-                      </Td>
-                    </Tr>
-                  </Tbody>
-                ) : (
-                  <Tbody>
-                    {rents.map((rent) => (
-                      <Tr key={rent.id}>
-                        <Td>{rent.car.brand}</Td>
-                        <Td>{rent.car.model}</Td>
-                        <Td>{rent.car.fuel_type}</Td>
-                        <Td>{rent.car.price}</Td>
-                        <Td>{rent.car.gearbox}</Td>
-                        <Td>{rent.rental_date}</Td>
-                        <Td>{rent.return_date}</Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                )}
-              </Table>
-            </TableContainer>
+                            <Table variant="striped" size={["md", "md", "lg"]}>
+                                <Thead>
+                                    <Tr>
+                                        <Th>{t("Nazwa Firmy")}</Th>
+                                        <Th>{t("profile.telephone")}</Th>
+                                        <Th>{t("profile.email")}</Th>
+                                        <Th>{t("profile.callDate2")}</Th>
+                                        <Th>{t("profile.status")}</Th>
+                                        <Th>{t("profile.action")}</Th>
+                                    </Tr>
+                                </Thead>
+                                {invites.length === 0 ? (
+                                    <Tbody>
+                                        
+                                    <Tr>
+                                        <Td>
+                                            <Link href={``}>
+                                            {t("Microsoft")}
+                                            </Link>
+                                        </Td>
+                                        <Td>{t("+48100222000")}</Td>
+                                        <Td>{t("microsoft@gmail.com")}</Td>
+                                        <Td>{t("31.01.2024")}</Td>
+                                        <Td>{t("Oczekuje")}</Td>
+                                        <Td>
+                                            
+                                        </Td>
+                                    </Tr>
+                                
+                            </Tbody>
+                                ) : (
+                                    
+                                    <Tbody>
+                                    <Tr>
+                                        <Td colSpan={7}>
+                                            <Text textAlign="center">{t("profile.noData")}</Text>
+                                        </Td>
+                                    </Tr>
+                                </Tbody>
+                                )}
+                            </Table>
+                        </TableContainer>
           </Box>
         </VStack>
       </Container>

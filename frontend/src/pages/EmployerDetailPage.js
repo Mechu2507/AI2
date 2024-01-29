@@ -134,6 +134,14 @@ function EmployerDetail() {
                                 </GridItem>
                                 <GridItem>
                                     <Heading fontWeight="500" color="gray.400" size="xs">
+                                        {t("profile.viewNumber")}
+                                    </Heading>
+                                    <Text fontWeight="600" color="gray.600">
+                                        {users.view_number}
+                                    </Text>
+                                </GridItem>
+                                <GridItem>
+                                    <Heading fontWeight="500" color="gray.400" size="xs">
                                         {t("profile.telephone")}
                                     </Heading>
                                     <Text fontWeight="600" color="gray.600">
