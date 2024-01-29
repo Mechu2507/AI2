@@ -16,7 +16,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import ProfileDrawer from "../components/ui/profile-drawer";
-import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import AvatarMenu from "../components/navbar/avatar-menu";
 import Navbar from "../components/navbar/Navbar";
@@ -40,7 +39,6 @@ function Profile() {
   return (
     <>
       <Navbar
-        sidebarContent={<HomeSidebarContent />}
         links={<NavbarLinks />}
         buttons={<AvatarMenu />}
       />

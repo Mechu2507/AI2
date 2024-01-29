@@ -19,7 +19,6 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import AvatarMenu from "../components/navbar/avatar-menu";
-import SidebarContent from "../components/dashboard/sidebar-content";
 import SearchInput from "../components/search";
 import axios from "axios";
 import { useContext, useState } from "react";
@@ -125,7 +124,7 @@ function Dashboard() {
   return (
     <>
       <Navbar
-        sidebarContent={<SidebarContent handleData={handleData} />}
+
         buttons={
           <>
             <SearchInput type={type.toLowerCase()} />
@@ -236,11 +235,7 @@ function Dashboard() {
         <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="xs">
           <DrawerOverlay />
           <DrawerContent>
-            <SidebarContent
-              handleData={handleData}
-              w="full"
-              borderRight="none"
-            />
+
           </DrawerContent>
         </Drawer>
       )}

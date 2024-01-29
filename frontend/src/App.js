@@ -3,7 +3,6 @@ import React from "react";
 import SignUp from "./pages/SignUpPage";
 import Login from "./pages/LoginPage";
 import Home from "./pages/HomePage";
-import Rent from "./pages/RentPage";
 import Profile from "./pages/ProfilePage";
 import ProfileEmployer from "./pages/ProfilePageEmployer";
 import Dashboard from "./pages/DashboardPage";
@@ -28,7 +27,6 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />
         <Route path="cars" element={<BookCars />} />
-        <Route path="cars/:id" element={<Rent />} />
         <Route path="profile" element={<Profile />} />
         <Route path="profile_employer" element={<ProfileEmployer />} />
         <Route path="dashboard" element={<Dashboard />} />
