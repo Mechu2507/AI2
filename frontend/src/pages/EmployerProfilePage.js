@@ -29,7 +29,6 @@ import ReactPaginate from "react-paginate";
 function EmployerProfile() {
     const { t } = useTranslation();
     const user_id = localStorage.getItem("id");
-    const [rents, setRents] = useState([]);
     const [invites, setInvites] = useState([]);
     const [archives, setArchives] = useState([]);
     const [users, setUsers] = useState([]);

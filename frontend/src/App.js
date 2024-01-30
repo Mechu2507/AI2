@@ -9,7 +9,6 @@ import Dashboard from "./pages/DashboardPage";
 import NotFound from "./pages/Page404";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import useAuthentication from "./useAuthentication";
-import BookCars from "./pages/BookCarsPage";
 import EmployersView from "./pages/EmployersViewPage";
 import EmployerDetail from "./pages/EmployerDetailPage";
 import EmployerProfile from "./pages/EmployerProfilePage";
@@ -26,7 +25,6 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />
-        <Route path="cars" element={<BookCars />} />
         <Route path="profile" element={<Profile />} />
         <Route path="profile_employer" element={<ProfileEmployer />} />
         <Route path="dashboard" element={<Dashboard />} />

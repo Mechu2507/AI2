@@ -68,20 +68,6 @@
   "menuList.profile": "Profil",
   "menuList.logout": "Wyloguj",
   "searchInput": "Szukaj ...",
-  "carCard": {
-    "rentNow": "Rent now",
-    "perDay": "/day",
-    "gearbox": "Gearbox",
-    "type": "Type",
-    "available": "Available",
-    "automatic": "automatic",
-    "manuel": "manuel",
-    "petrol": "petrol",
-    "diesel": "diesel",
-    "yes": "yes",
-    "no": "no",
-    "confirmRent": "Confirm rent"
-  },
   "employeeCard": {
     "perMonth": "/miesiąc",
     "moreInfo": "Więcej informacji",
