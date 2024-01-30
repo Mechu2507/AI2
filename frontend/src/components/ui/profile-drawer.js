@@ -28,13 +28,13 @@ function ProfileDrawer() {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
-    telephone: "",
+    email: "",
     company_name: "",
     company_address: "",
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("token"); // Get the token from localStorage
+    const token = localStorage.getItem("token"); 
 
     axios.get("http://127.0.0.1:8000/api/getUserDetails", {
       headers: {
@@ -43,10 +43,11 @@ function ProfileDrawer() {
     })
     .then((response) => {
       if (response.data && response.data.user) {
+        console.log("User data from server:", response.data.user);
         setFormData({
           firstname: response.data.user.firstname || "",
           lastname: response.data.user.lastname || "",
-          telephone: response.data.user.telephone || "",
+          email: response.data.user.email || "",
           company_name: response.data.user.company_name || "",
           company_address: response.data.user.company_address || "",
         });
@@ -80,7 +81,7 @@ function ProfileDrawer() {
       setFormData({
         firstname: response.data.firstname,
         lastname: response.data.lastname,
-        telephone: response.data.telephone,
+        email: response.data.email,
         company_name: response.data.company_name,
         company_address: response.data.company_address,
       });
@@ -144,13 +145,13 @@ function ProfileDrawer() {
               </Box>
 
               <Box>
-                <FormLabel htmlFor="telephone">
-                  {t("profile.phoneNumber")}
+                <FormLabel htmlFor="email">
+                  {t("profile.email")}
                 </FormLabel>
                 <Input
-                  id="telephone"
-                  name="telephone"
-                  value={formData.telephone}
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                 />
               </Box>
