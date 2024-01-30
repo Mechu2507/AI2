@@ -14,38 +14,49 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 const AvatarMenu = () => {
   const { t } = useTranslation();
-  const { i18n } = useTranslation();
-  const role_id = localStorage.getItem('role_id');
-  const fullname =
-    localStorage.getItem("firstname") + " " + localStorage.getItem("lastname");
-  const email = localStorage.getItem("email");
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const to_route = useNavigate();
-  // const navigate = (route) => {
-  //   to_route(route);
-  // };
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [user, setUser] = useState({ firstname: '', lastname: '', email: '' });
 
-  const userid = localStorage.getItem("userid");
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-
+  useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/logout")
-      .then((response) => {
-        localStorage.clear();
-        //setIsLoggedIn(false);
-        navigate("/login");
+      .get("http://127.0.0.1:8000/api/getUserDetails",{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       })
-      .catch((e) => {
-        // ...
-      });
-  };
+        .then((response) => {
+            if (response.data && response.data.user) {
+                setUser(response.data.user);
+            }
+        })
+        .catch((e) => {
+            console.error(e);
+        });
+    }, []);
+
+    const handleLogout = (e) => {
+      e.preventDefault();
+        axios
+            .post("http://127.0.0.1:8000/api/auth/logout", {
+            }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
+            .then((response) => {
+                localStorage.removeItem("token");
+                // localStorage.removeItem("user");
+                navigate("/login");
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+    }
 
   const [currentLanguage, setCurrentLanguage] = useState("pl");
 
@@ -71,14 +82,14 @@ const AvatarMenu = () => {
             </MenuButton>
             <MenuList>
               <Box mt={4} textAlign="center">
-                <Text fontWeight="bold">{fullname}</Text>
+                <Text fontWeight="bold">{user.firstname} {user.lastname}</Text>
                 <Text fontSize="sm" color={"gray"}>
-                  {email}
+                  {user.email}
                 </Text>
               </Box>
               <MenuDivider />
 
-              <MenuItem onClick={() => navigate( role_id === "2" ? "/employer_profile" : "/profile")}>
+              <MenuItem onClick={() => navigate( user.role_id === "2" ? "/employer_profile" : "/profile")}>
   {t("menuList.profile")}
 </MenuItem>
               <MenuDivider />
