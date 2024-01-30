@@ -74,6 +74,8 @@ Route::get('/forlater/{employers_user_id}', [EmployersController::class, 'forlat
 Route::get('complete_employer', [UserController::class, 'complete']);
 Route::get('complete_employee', [UserController::class, 'complete']);
 
+Route::get('getUserDetails', [AuthController::class, 'getUserDetails']);
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -82,5 +84,5 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
-    Route::get('getUserDetails', [AuthController::class, 'getUserDetails']);
+
 });
