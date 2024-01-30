@@ -20,7 +20,7 @@ const AvatarMenu = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [user, setUser] = useState({ firstname: '', lastname: '', email: '' });
+  const [user, setUser] = useState({ firstname: '', lastname: '', email: '', role_id: '' });
 
   useEffect(() => {
     axios
@@ -50,7 +50,6 @@ const AvatarMenu = () => {
             })
             .then((response) => {
                 localStorage.removeItem("token");
-                // localStorage.removeItem("user");
                 navigate("/login");
             })
             .catch((e) => {
@@ -59,7 +58,6 @@ const AvatarMenu = () => {
     }
 
   const [currentLanguage, setCurrentLanguage] = useState("pl");
-
 
   return (
     <Box px={4}>

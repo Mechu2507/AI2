@@ -36,7 +36,7 @@ function EmployerDetail() {
     const [users, setUsers] = useState({});
     const [isLoading, setLoading] = useState(true);
     const callDate = useRef("");
-
+    const [employers, setEmployer] = useState({});
 
     useEffect(() => {
         axios
@@ -47,13 +47,33 @@ function EmployerDetail() {
             });
     }, [params.id]);
 
+    useEffect(() => {
+        axios
+            .get(`http://127.0.0.1:8000/api/getUserDetails`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }
+            )
+            .then((response) => {
+                if (response.data && response.data.user) {
+                    setEmployer(response.data.user);
+                }
+            })
+            .catch((e) => {
+                    console.error(e);
+                }
+            );
+    }, []);
+
 
     if (isLoading) return <LoadingSpinner />;
 
     function createInvite(e){
         e.preventDefault();
         const invite = {
-            employers_user_id: localStorage.getItem("id"),
+            employers_user_id: employers.id,
             employees_user_id: users.id,
             status_id: 1,
             call_date: callDate.current.value,
@@ -77,8 +97,9 @@ function EmployerDetail() {
 
     function saveForLater(e){
         e.preventDefault();
+
         const saved = {
-            employers_user_id: localStorage.getItem("id"),
+            employers_user_id: employers.id,
             employees_user_id: users.id,
         };
         axios

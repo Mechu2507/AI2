@@ -14,8 +14,9 @@ import NavbarLinks from "../components/navbar/NavbarLinks";
 import { useEffect, useState } from "react";
 
 function Home() {
-  const { isLoggedIn, isLoading } = useAuthentication();
   const [showNavbarContent, setShowNavbarContent] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -24,6 +25,15 @@ function Home() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setLoggedIn(true);
+    }
+    setIsLoading(false);
+  }, []);
+
   return (
     <>
       <Navbar

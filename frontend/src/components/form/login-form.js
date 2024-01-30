@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import {useRef, useState} from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import FormButton from "./form-button";
@@ -17,6 +17,7 @@ const LoginForm = () => {
   const toast = useToast();
   const email = useRef();
   const password = useRef();
+  const [user, setUser] = useState({ firstname: '', lastname: '', email: '', role_id: '' });
 
   function Login(e) {
     e.preventDefault();
@@ -28,21 +29,30 @@ const LoginForm = () => {
       })
       .then((response) => {
 
-        console.log("Response data:", response.data);
-
         localStorage.setItem("token", response.data.token);
-        //localStorage.setItem("user", JSON.stringify(response.data.user));
-
 
           setLoggedIn(true);
 
-          // if (role_id === 1) {
-          //   navigate("/profile");
-          // } else if (role_id === 2) {
-          //   navigate("/employers");
-          // }
+          axios
+              .get("http://127.0.0.1:8000/api/getUserDetails",{
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                })
+              .then((response) => {
+                  if (response.data && response.data.user) {
+                      setUser(response.data.user);
 
-            navigate("/employers");
+                      if (response.data.user.role_id === 1) {
+                          navigate("/profile");
+                      } else {
+                          navigate("/employers");
+                      }
+                  }
+              } )
+              .catch((e) => {
+                  console.error(e);
+              });
   })
         .catch((e) => {
             console.error(e);
