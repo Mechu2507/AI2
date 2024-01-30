@@ -32,26 +32,24 @@ function EmployerProfile() {
     const [archives, setArchives] = useState([]);
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [user_id, setUser_id] = useState({ id: ''});
+    const [user_id, setUser_id] = useState('');
 
-    useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/getUserDetails`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            })
-            .then((response) => {
-                if (response.data && response.data.user) {
-                    setUser_id(response.data.user);
-                }
-            })
-            .catch((e) => {
-                console.error(e);
+useEffect(() => {
+    axios
+        .get(`http://127.0.0.1:8000/api/getUserDetails`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        })
+        .then((response) => {
+            if (response.data && response.data.user) {
+                setUser_id(response.data.user.id);
             }
-        );
-    }, []);
-
+        })
+        .catch((e) => {
+            console.error(e);
+        });
+}, []);
 
     const updateInviteStatus = (inviteid, statusId) => {
         axios
@@ -67,28 +65,34 @@ function EmployerProfile() {
     }
 
     useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/users/${user_id.id}/invites`)
-            .then((response) => {
-                setInvites(response.data.data);
-            });
-    }, []);
-
+        if (user_id) {
+            axios
+                .get(`http://127.0.0.1:8000/api/users/${user_id}/invites`)
+                .then((response) => {
+                    setInvites(response.data.data);
+                });
+        }
+    }, [user_id]);
+    
     useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/users/${user_id.id}/archives`)
-            .then((response) => {
-                setArchives(response.data.data);
-            });
-    }, []);
-
+        if (user_id) {
+            axios
+                .get(`http://127.0.0.1:8000/api/users/${user_id}/archives`)
+                .then((response) => {
+                    setArchives(response.data.data);
+                });
+        }
+    }, [user_id]);
+    
     useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/forlater/${user_id.id}`)
-            .then((response) => {
-                setUsers(response.data.data);
-            });
-    }, []);
+        if (user_id) {
+            axios
+                .get(`http://127.0.0.1:8000/api/forlater/${user_id}`)
+                .then((response) => {
+                    setUsers(response.data.data);
+                });
+        }
+    }, [user_id]);
 
     const PER_PAGE = 3;
 
