@@ -85,11 +85,12 @@ const AvatarMenu = () => {
                 <Text fontWeight="bold">{user.firstname} {user.lastname}</Text>
                 <Text fontSize="sm" color={"gray"}>
                   {user.email}
+                  {user.role_id}
                 </Text>
               </Box>
               <MenuDivider />
 
-              <MenuItem onClick={() => navigate( user.role_id === "2" ? "/employer_profile" : "/profile")}>
+              <MenuItem onClick={() => navigate( user.role_id === 2 ? "/employer_profile" : "/profile")}>
   {t("menuList.profile")}
 </MenuItem>
               <MenuDivider />
