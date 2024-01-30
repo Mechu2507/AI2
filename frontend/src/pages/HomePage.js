@@ -9,7 +9,7 @@ import ClientSpeak from "../components/home/client-speak";
 import AvatarMenu from "../components/navbar/avatar-menu";
 import useAuthentication from "../useAuthentication";
 import WhyChooseUs from "../components/home/why-choose-us";
-import FeaturedVehicles from "../components/home/featured-vehicles";
+import AboutClients from "../components/home/about-clients";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import { useEffect, useState } from "react";
 
@@ -59,7 +59,7 @@ function Home() {
           <HomePageImage />
         </Flex>
       </Container>
-      <FeaturedVehicles />
+      <AboutClients />
       <WhyChooseUs />
       <ClientSpeak />
       <Footer />

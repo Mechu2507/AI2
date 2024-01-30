@@ -48,7 +48,7 @@ const EmpCard = ({ image, empName, job }) => {
   );
 };
 
-const FeaturedVehicles = () => {
+const AboutClients = () => {
   const { t } = useTranslation();
 
   return (
@@ -72,7 +72,7 @@ const FeaturedVehicles = () => {
               color: "gray.900",
             }}
           >
-            {t("featuredVehicles.title")}
+            {t("about-clients.title")}
           </chakra.p>
           <chakra.p
             mt={4}
@@ -86,7 +86,7 @@ const FeaturedVehicles = () => {
               color: "gray.400",
             }}
           >
-            {t("featuredVehicles.description")}
+            {t("about-clients.description")}
           </chakra.p>
         </Box>
         <Stack
@@ -102,4 +102,4 @@ const FeaturedVehicles = () => {
   );
 };
 
-export default FeaturedVehicles;
+export default AboutClients;
