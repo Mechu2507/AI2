@@ -86,25 +86,20 @@ function EmployerProfile() {
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
     }
+    const [sortOrder, setSortOrder] = useState("asc");
 
-    const [sortOrder, setSortOrder] = useState(true);
-
-    const sortInvites = () => {
-        setSortOrder(!sortOrder);
-        const sortedInvites = [...invites].sort((a, b) => {
-          const statusA = a.status === "anulowane" ? 1 : a.status === "zakończone" ? 2 : 3;
-          const statusB = b.status === "anulowane" ? 1 : b.status === "zakończone" ? 2 : 3;
-      
-          if (statusA < statusB) {
-            return sortOrder ? -1 : 1;
-          }
-          if (statusA > statusB) {
-            return sortOrder ? 1 : -1;
-          }
-          return 0;
+    const handleSortByStatus = () => {
+        const sortedData = [...archives].sort((a, b) => {
+            if (sortOrder === "asc") {
+                return a.status.localeCompare(b.status);
+            } else {
+                return b.status.localeCompare(a.status);
+            }
         });
-        setInvites(sortedInvites);
-      };
+        setArchives(sortedData);
+        setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    };
+
 
     return (
         <>
@@ -225,7 +220,9 @@ function EmployerProfile() {
                                         <Th>{t("profile.email")}</Th>
                                         <Th>{t("profile.expectedSalary")}</Th>
                                         <Th>{t("profile.callDate2")}</Th>
-                                        <Th onClick={sortInvites}>{t("profile.status")}</Th>
+                                        <Th onClick={handleSortByStatus} cursor="pointer">
+                            {t("profile.status")} {sortOrder === "asc" ? "↓" : "↑"}
+                        </Th>
                                     </Tr>
                                 </Thead>
                                 {archives.length === 0 ? (
