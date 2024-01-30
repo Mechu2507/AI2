@@ -24,7 +24,6 @@ function ProfileDrawer() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
-  const user_id = localStorage.getItem("id");
 
   const [formData, setFormData] = useState({
     firstname: "",
@@ -35,12 +34,26 @@ function ProfileDrawer() {
   });
 
   useEffect(() => {
-    setFormData({
-      firstname: localStorage.getItem("firstname") === "null" ? "" : localStorage.getItem("firstname") || "",
-      lastname: localStorage.getItem("lastname") === "null" ? "" : localStorage.getItem("lastname") || "",
-      telephone: localStorage.getItem("telephone") === "null" ? "" : localStorage.getItem("telephone") || "",
-      company_name: localStorage.getItem("company_name") === "null" ? "" : localStorage.getItem("company_name") || "",
-      company_address: localStorage.getItem("company_address") === "null" ? "" : localStorage.getItem("company_address") || "",
+    const token = localStorage.getItem("token"); // Get the token from localStorage
+
+    axios.get("http://127.0.0.1:8000/api/getUserDetails", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      if (response.data && response.data.user) {
+        setFormData({
+          firstname: response.data.user.firstname || "",
+          lastname: response.data.user.lastname || "",
+          telephone: response.data.user.telephone || "",
+          company_name: response.data.user.company_name || "",
+          company_address: response.data.user.company_address || "",
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching user data", error);
     });
   }, []);
 
@@ -49,28 +62,34 @@ function ProfileDrawer() {
   };
 
   const handleSubmit = () => {
-    axios
-      .put(`http://127.0.0.1:8000/api/user/${user_id}`, formData)
-      .then((response) => {
-        const updatedUser = response.data.data;
-        if (updatedUser) {
-          showToast(
-            toast,
-            "Dane zostały pomyślnie zaktualizowane.",
-            "success",
-            "Success"
-          );
-          localStorage.setItem("firstname", updatedUser.firstname);
-          localStorage.setItem("lastname", updatedUser.lastname);
-          localStorage.setItem("telephone", updatedUser.telephone);
-          localStorage.setItem("company_name", updatedUser.company_name);
-          localStorage.setItem("company_address", updatedUser.company_address);
-          onClose();
-        }
-      })
-      .catch((error) => {
-        console.log(error);
+    const token = localStorage.getItem("token");
+
+    axios.put(`http://127.0.0.1:8000/api/user/profile`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      showToast(
+        toast,
+        "Dane zostały pomyślnie zaktualizowane.",
+        "success",
+        "Success"
+      );
+
+      setFormData({
+        firstname: response.data.firstname,
+        lastname: response.data.lastname,
+        telephone: response.data.telephone,
+        company_name: response.data.company_name,
+        company_address: response.data.company_address,
       });
+
+      onClose();
+    })
+    .catch((error) => {
+      console.error("Error updating profile", error);
+    });
   };
 
   return (
