@@ -34,22 +34,23 @@ function EmployerProfile() {
     const [currentPage, setCurrentPage] = useState(0);
     const [user_id, setUser_id] = useState('');
 
-useEffect(() => {
-    axios
-        .get(`http://127.0.0.1:8000/api/getUserDetails`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        })
-        .then((response) => {
-            if (response.data && response.data.user) {
-                setUser_id(response.data.user.id);
-            }
-        })
-        .catch((e) => {
-            console.error(e);
-        });
-}, []);
+    useEffect(() => {
+        axios
+            .get(`http://127.0.0.1:8000/api/getUserDetails`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
+            .then((response) => {
+                if (response.data && response.data.user) {
+                    setUser_id(response.data.user.id);
+                }
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+    }, []);
+
 
     const updateInviteStatus = (inviteid, statusId) => {
         axios

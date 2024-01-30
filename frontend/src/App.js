@@ -12,6 +12,8 @@ import useAuthentication from "./useAuthentication";
 import EmployersView from "./pages/EmployersViewPage";
 import EmployerDetail from "./pages/EmployerDetailPage";
 import EmployerProfile from "./pages/EmployerProfilePage";
+import ProtectedRoute from "./ProtectedRoute";
+import Page401 from "./pages/Page401";
 
 function App() {
   const { isLoggedIn, isLoading } = useAuthentication();
@@ -25,13 +27,18 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile" element={
+            <ProtectedRoute allowedRoles={[1, 2]}>
+                <Profile />
+            </ProtectedRoute>}
+        />
         <Route path="profile_employer" element={<ProfileEmployer />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
         <Route path="employers" element={<EmployersView />} />
         <Route path="employers/:id" element={<EmployerDetail />} />
         <Route path="employer_profile" element={<EmployerProfile />} />
+        <Route path="Unauthorized" element={<Page401 />} />
       </Routes>
     </BrowserRouter>
   );
