@@ -36,14 +36,13 @@ const AvatarMenu = () => {
     e.preventDefault();
 
     axios
-      .get("http://127.0.0.1:8000/api/logout")
+      .post("http://127.0.0.1:8000/api/auth/logout")
       .then((response) => {
         localStorage.clear();
-        //setIsLoggedIn(false);
         navigate("/login");
       })
       .catch((e) => {
-        // ...
+        console.error(e);
       });
   };
 
