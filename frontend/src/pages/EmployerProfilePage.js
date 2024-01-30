@@ -87,6 +87,25 @@ function EmployerProfile() {
         setCurrentPage(selectedPage);
     }
 
+    const [sortOrder, setSortOrder] = useState(true);
+
+    const sortInvites = () => {
+        setSortOrder(!sortOrder);
+        const sortedInvites = [...invites].sort((a, b) => {
+          const statusA = a.status === "anulowane" ? 1 : a.status === "zakończone" ? 2 : 3;
+          const statusB = b.status === "anulowane" ? 1 : b.status === "zakończone" ? 2 : 3;
+      
+          if (statusA < statusB) {
+            return sortOrder ? -1 : 1;
+          }
+          if (statusA > statusB) {
+            return sortOrder ? 1 : -1;
+          }
+          return 0;
+        });
+        setInvites(sortedInvites);
+      };
+
     return (
         <>
             <Navbar
@@ -206,7 +225,7 @@ function EmployerProfile() {
                                         <Th>{t("profile.email")}</Th>
                                         <Th>{t("profile.expectedSalary")}</Th>
                                         <Th>{t("profile.callDate2")}</Th>
-                                        <Th>{t("profile.status")}</Th>
+                                        <Th onClick={sortInvites}>{t("profile.status")}</Th>
                                     </Tr>
                                 </Thead>
                                 {archives.length === 0 ? (

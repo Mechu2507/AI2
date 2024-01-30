@@ -1,4 +1,4 @@
-import { Box, GridItem, SimpleGrid, VStack } from "@chakra-ui/react";
+import { Box, GridItem, SimpleGrid, VStack, Input } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/navbar/Navbar";
@@ -16,6 +16,8 @@ function EmployersView() {
     const [isLoading, setLoading] = useState(true);
     const [users, setUsers] = useState();
     const [currentPage, setCurrentPage] = useState(0);
+    const [minSalary, setMinSalary] = useState("");
+    const [maxSalary, setMaxSalary] = useState("");
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/api/employers").then((response) => {
@@ -30,11 +32,17 @@ function EmployersView() {
 
     const offset = currentPage * PER_PAGE;
 
-    const currentPageData = users
+    const filteredUsers = users.filter(user => {
+        const numericMinSalary = minSalary ? Number(minSalary) : 0;
+        const numericMaxSalary = maxSalary ? Number(maxSalary) : Infinity;
+        return user.expected_salary >= numericMinSalary && user.expected_salary <= numericMaxSalary;
+    });
+
+    const currentPageData = filteredUsers
         .slice(offset, offset + PER_PAGE)
         .map((user) => <EmployeeCard key={user.id} props={user} />);
 
-    const pageCount = Math.ceil(users.length / PER_PAGE);
+    const pageCount = Math.ceil(filteredUsers.length / PER_PAGE);
 
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
@@ -44,16 +52,26 @@ function EmployersView() {
         <Box minHeight="100vh" display="flex" flexDirection="column">
             <Box flexGrow={1}>
                 <Navbar
-
                     links={<NavbarLinks />}
                     buttons={
                         <>
-                            <SearchInput type={"user"} />
+                            <Input
+                    placeholder="Wpisz minimalną płacę"
+                    value={minSalary}
+                    onChange={(e) => setMinSalary(e.target.value)}
+                    style={{maxWidth: "250px"}}
+                />
+                <Input
+                    placeholder="Wpisz maksymalną płacę"
+                    value={maxSalary}
+                    onChange={(e) => setMaxSalary(e.target.value)}
+                    style={{maxWidth: "250px"}}
+                />
                             <AvatarMenu />
                         </>
                     }
                 />
-
+                
                 <VStack>
                     <SimpleGrid
                         columns={[1, 1, 2, 2, 3]}
