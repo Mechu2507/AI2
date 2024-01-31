@@ -47,77 +47,77 @@ class EmployeesController extends Controller
         return response()->json(['success' => true, 'data' => $invite], 201);
     }
 
-    public function getUserArchives($employers_user_id)
-    {
-        $invitations = Invitation::with(['employer', 'status'])
-                              ->where('employers_user_id', $employers_user_id)
-                              ->whereHas('status', function($query) {
-                                  $query->whereIn('id', [2, 3]);
-                              })
-                              ->get();
+    // public function getUserArchives($employers_user_id)
+    // {
+    //     $invitations = Invitation::with(['employer', 'status'])
+    //                           ->where('employers_user_id', $employers_user_id)
+    //                           ->whereHas('status', function($query) {
+    //                               $query->whereIn('id', [2, 3]);
+    //                           })
+    //                           ->get();
 
-        $employerDetails = $invitations->map(function($invitation) {
-            $employer = $invitation->employer;
-            return [
-                'company_name' => $employer->company_name,
-                'telephone' => $employer->telephone,
-                'email' => $employer->email,
-                'industry' => $employer->industry,
-                'location' => $employer->location,
-                'call_date' => $invitation->call_date,
-                'status' => $invitation->status->status
-            ];
-        });
+    //     $employerDetails = $invitations->map(function($invitation) {
+    //         $employer = $invitation->employer;
+    //         return [
+    //             'company_name' => $employer->company_name,
+    //             'telephone' => $employer->telephone,
+    //             'email' => $employer->email,
+    //             'industry' => $employer->industry,
+    //             'location' => $employer->location,
+    //             'call_date' => $invitation->call_date,
+    //             'status' => $invitation->status->status
+    //         ];
+    //     });
 
-        return response()->json(['success' => true, 'data' => $employerDetails]);
-    }
+    //     return response()->json(['success' => true, 'data' => $employerDetails]);
+    // }
 
-    public function updateStatus($id, Request $request)
-    {
-        $invite = Invitation::findOrFail($id);
+    // public function updateStatus($id, Request $request)
+    // {
+    //     $invite = Invitation::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'status_id' => 'required',
-        ]);
+    //     $validatedData = $request->validate([
+    //         'status_id' => 'required',
+    //     ]);
 
-        DB::table('invitations')->where('id', $id)->update([
-            'status_id' => $request->status_id,
-        ]);
+    //     DB::table('invitations')->where('id', $id)->update([
+    //         'status_id' => $request->status_id,
+    //     ]);
 
-        return response()->json([
-            'data' => $invite,
-            'message' => 'Status updated successfully',
-        ]);
+    //     return response()->json([
+    //         'data' => $invite,
+    //         'message' => 'Status updated successfully',
+    //     ]);
 
-    }
+    // }
 
-    public function save(Request $request)
-    {
-        $validatedData = $request->validate([
-            'employees_user_id' => 'required',
-            'employers_user_id' => 'required',
-        ]);
+    // public function save(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'employees_user_id' => 'required',
+    //         'employers_user_id' => 'required',
+    //     ]);
 
-        $saved = DB::table('saves')->insert([
-            'employees_user_id' => $request->input('employees_user_id'),
-            'employers_user_id' => $request->input('employers_user_id'),
-        ]);
+    //     $saved = DB::table('saves')->insert([
+    //         'employees_user_id' => $request->input('employees_user_id'),
+    //         'employers_user_id' => $request->input('employers_user_id'),
+    //     ]);
 
-        return response()->json(['success' => true, 'data' => $saved], 201);
-    }
+    //     return response()->json(['success' => true, 'data' => $saved], 201);
+    // }
 
-    public function forlater($employers_user_id)
-    {
-        $saves = Save::with('employee')
-                ->where('employers_user_id', $employers_user_id)
-                ->get();
+    // public function forlater($employers_user_id)
+    // {
+    //     $saves = Save::with('employee')
+    //             ->where('employers_user_id', $employers_user_id)
+    //             ->get();
 
-    $savedEmployees = $saves->map(function($save) {
-        return $save->employee;
-    });
+    // $savedEmployees = $saves->map(function($save) {
+    //     return $save->employee;
+    // });
 
-    return response()->json(['success' => true, 'data' => $savedEmployees]);
-    }
+    // return response()->json(['success' => true, 'data' => $savedEmployees]);
+    // }
 
     public function update(Request $request, $id)
     {

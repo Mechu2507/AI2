@@ -115,6 +115,10 @@ class EmployersController extends Controller
 
     public function updateStatus($id, Request $request)
     {
+        if(Auth::payload()->get('role') == 1){
+            abort(403, 'Unauthorized action.');
+        }
+
         $invite = Invitation::findOrFail($id);
 
         $validatedData = $request->validate([
@@ -153,6 +157,10 @@ class EmployersController extends Controller
 
     public function forlater($employers_user_id)
     {
+        if(Auth::payload()->get('role') == 1){
+            abort(403, 'Unauthorized action.');
+        }
+
         $saves = Save::with('employee')
                 ->where('employers_user_id', $employers_user_id)
                 ->get();
