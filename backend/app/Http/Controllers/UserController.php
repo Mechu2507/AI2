@@ -73,7 +73,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'firstname' => 'required|min:2|max:20',
             'lastname' => 'required|min:2|max:20',
-            'telephone' => 'required|regex:/^[0-9]{9,12}$/',
+            'telephone' => 'regex:/^[0-9]{9,12}$/',
             'company_name' => 'max:50',
             'company_address' => 'max:50',
             'education' => 'max:50',
@@ -113,9 +113,6 @@ class UserController extends Controller
         return response()->json(['success' => true, 'message' => 'Profile updated successfully', 'data' => $user]);
 
     }
-
-
-
 
     public function update(Request $request, $id)
     {

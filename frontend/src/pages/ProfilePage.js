@@ -44,7 +44,6 @@ function Profile() {
                   console.log(error, t("profile.inviteStatusNotUpdated"));
           });
 
-
   }
 
   useEffect(() => {
@@ -54,11 +53,14 @@ function Profile() {
               setInvites(response.data.data);
           });
   }, []);
+
   const PER_PAGE = 3;
   const offset = currentPage * PER_PAGE;
   const currentPageData = users
         .slice(offset, offset + PER_PAGE)
         .map((user) => <EmployeeCard key={user.id} props={user} />);
+
+  
   return (
     <>
       <Navbar

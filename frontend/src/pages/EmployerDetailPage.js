@@ -40,7 +40,12 @@ function EmployerDetail() {
 
     useEffect(() => {
         axios
-            .get(`http://127.0.0.1:8000/api/employers/${params.id}`)
+            .get(`http://127.0.0.1:8000/api/employers/${params.id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                })
             .then((response) => {
                 setUsers(response.data.data[0]);
                 setLoading(false);
@@ -79,7 +84,12 @@ function EmployerDetail() {
             call_date: callDate.current.value,
         };
         axios
-            .post("http://127.0.0.1:8000/api/invites", invite)
+            .post("http://127.0.0.1:8000/api/invites", invite,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                })
             .then((response) => {
                 showToast(
                     toast,
@@ -103,7 +113,12 @@ function EmployerDetail() {
             employees_user_id: users.id,
         };
         axios
-            .post("http://127.0.0.1:8000/api/saved", saved)
+            .post("http://127.0.0.1:8000/api/saved", saved,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                })
             .then((response) => {
                 showToast(
                     toast,

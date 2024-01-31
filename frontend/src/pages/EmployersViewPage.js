@@ -20,7 +20,13 @@ function EmployersView() {
     const [maxSalary, setMaxSalary] = useState("");
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/employers").then((response) => {
+        axios.get("http://127.0.0.1:8000/api/employers",
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
+            .then((response) => {
             setUsers(response.data.data);
             setLoading(false);
         });

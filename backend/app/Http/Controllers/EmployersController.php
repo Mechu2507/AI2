@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\Save;
+use Illuminate\Support\Facades\Auth;
 
 
 class EmployersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['']]);
+    }
 
     public function index()
     {
@@ -44,6 +50,10 @@ class EmployersController extends Controller
 
     public function getUserInvites($employers_user_id)
     {
+        if(Auth::payload()->get('role') == 1){
+            abort(403, 'Unauthorized action.');
+        }
+
         $invitations = Invitation::with(['employee', 'status'])
                               ->where('employers_user_id', $employers_user_id)
                               ->whereHas('status', function($query) {
@@ -72,6 +82,10 @@ class EmployersController extends Controller
 
     public function getUserArchives($employers_user_id)
     {
+        if(Auth::payload()->get('role') == 1){
+            abort(403, 'Unauthorized action.');
+        }
+
         $invitations = Invitation::with(['employee', 'status'])
                               ->where('employers_user_id', $employers_user_id)
                               ->whereHas('status', function($query) {
@@ -141,5 +155,37 @@ class EmployersController extends Controller
     });
 
     return response()->json(['success' => true, 'data' => $savedEmployees]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        if(Auth::payload()->get('role') == 1){
+            abort(403, 'Unauthorized action.');
+        }
+
+        $user = User::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'firstname' => 'required|max:30',
+            'lastname' => 'required|max:30',
+            'email' => 'required',
+            'company_name' => 'max:50',
+            'company_address' => 'max:50',
+
+        ]);
+
+        DB::table('users')->where('id', $id)->update([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'company_name' => $request->company_name,
+            'company_address' => $request->company_address,
+
+        ]);
+
+        return response()->json([
+            'data' => $user,
+            'message' => 'User updated successfully',
+        ]);
     }
 }

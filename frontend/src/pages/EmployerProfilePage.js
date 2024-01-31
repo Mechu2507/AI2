@@ -33,6 +33,7 @@ function EmployerProfile() {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [user_id, setUser_id] = useState('');
+    const [isForbidden, setIsForbidden] = useState(false);
 
     useEffect(() => {
         axios
@@ -54,7 +55,13 @@ function EmployerProfile() {
 
     const updateInviteStatus = (inviteid, statusId) => {
         axios
-            .put(`http://127.0.0.1:8000/api/invites/${inviteid}/update-status`, {status_id: statusId})
+            .put(`http://127.0.0.1:8000/api/invites/${inviteid}/update-status`,
+                {status_id: statusId},
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                })
             .then((response) => {
                     console.log(response, t("profile.inviteStatusUpdated"));
                     window.location.reload();
@@ -68,9 +75,20 @@ function EmployerProfile() {
     useEffect(() => {
         if (user_id) {
             axios
-                .get(`http://127.0.0.1:8000/api/users/${user_id}/invites`)
+                .get(`http://127.0.0.1:8000/api/users/${user_id}/invites`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                    })
                 .then((response) => {
                     setInvites(response.data.data);
+                    setIsForbidden(false);
+                })
+                .catch((error) => {
+                    if (error.response && error.response.status === 403) {
+                        setIsForbidden(true);
+                    }
                 });
         }
     }, [user_id]);
@@ -78,9 +96,20 @@ function EmployerProfile() {
     useEffect(() => {
         if (user_id) {
             axios
-                .get(`http://127.0.0.1:8000/api/users/${user_id}/archives`)
+                .get(`http://127.0.0.1:8000/api/users/${user_id}/archives`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                    })
                 .then((response) => {
                     setArchives(response.data.data);
+                    setIsForbidden(false);
+                })
+                .catch((error) => {
+                    if (error.response && error.response.status === 403) {
+                        setIsForbidden(true);
+                    }
                 });
         }
     }, [user_id]);
@@ -88,7 +117,12 @@ function EmployerProfile() {
     useEffect(() => {
         if (user_id) {
             axios
-                .get(`http://127.0.0.1:8000/api/forlater/${user_id}`)
+                .get(`http://127.0.0.1:8000/api/forlater/${user_id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                    })
                 .then((response) => {
                     setUsers(response.data.data);
                 });
@@ -156,11 +190,19 @@ function EmployerProfile() {
                                 </Thead>
                                 {invites.length === 0 ? (
                                     <Tbody>
-                                        <Tr>
-                                            <Td colSpan={7}>
-                                                <Text textAlign="center">{t("profile.noData")}</Text>
-                                            </Td>
-                                        </Tr>
+                                        {isForbidden ? (
+                                            <Tr>
+                                                <Td colSpan={7}  style={{ backgroundColor: "red"}}>
+                                                    <Text textAlign="center" textColor="white">Acces Denied</Text>
+                                                </Td>
+                                            </Tr>
+                                        ) : (
+                                            <Tr>
+                                                <Td colSpan={7}>
+                                                    <Text textAlign="center">{t("profile.noData")}</Text>
+                                                </Td>
+                                            </Tr>
+                                        )}
                                     </Tbody>
                                 ) : (
                                     <Tbody>
@@ -249,11 +291,21 @@ function EmployerProfile() {
                                 </Thead>
                                 {archives.length === 0 ? (
                                     <Tbody>
-                                        <Tr>
-                                            <Td colSpan={7}>
-                                                <Text textAlign="center">{t("profile.emptyArchive")}</Text>
-                                            </Td>
-                                        </Tr>
+
+                                        {isForbidden ? (
+                                            <Tr>
+                                                <Td colSpan={7} style={{ backgroundColor: "red"}}>
+                                                    <Text textAlign="center" textColor="white">Acces Denied</Text>
+                                                </Td>
+                                            </Tr>
+                                        ) : (
+                                            <Tr>
+                                                <Td colSpan={7}>
+                                                    <Text textAlign="center">{t("profile.emptyArchive")}</Text>
+                                                </Td>
+                                            </Tr>
+                                        )}
+
                                     </Tbody>
                                 ) : (
                                     <Tbody>

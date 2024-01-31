@@ -24,6 +24,7 @@ function ProfileDrawer() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
+  const [user_id, setUserId] = useState({});
 
   const [formData, setFormData] = useState({
     firstname: "",
@@ -42,9 +43,10 @@ function ProfileDrawer() {
       },
     })
     .then((response) => {
+        setUserId(response.data.user.id);
       if (response.data && response.data.user) {
-        console.log("User data from server:", response.data.user);
         setFormData({
+          role_id: response.data.user.role_id || "",
           firstname: response.data.user.firstname || "",
           lastname: response.data.user.lastname || "",
           email: response.data.user.email || "",
@@ -58,6 +60,8 @@ function ProfileDrawer() {
     });
   }, []);
 
+
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -65,7 +69,7 @@ function ProfileDrawer() {
   const handleSubmit = () => {
     const token = localStorage.getItem("token");
 
-    axios.put(`http://127.0.0.1:8000/api/user/profile`, formData, {
+    axios.put(`http://127.0.0.1:8000/api/employers/${user_id}/update`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

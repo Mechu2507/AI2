@@ -27,18 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('signup', [UserController::class, 'signup']);
 
-// Route::post('login', [UserController::class, 'login']);
-
 Route::get('users', [UserController::class, 'index']);
-
-
-
-//Route::get('logout', [UserController::class, 'logout']);
 
 Route::get('rents', [RentController::class, 'index']);
 
 Route::post('rents', [RentController::class, 'store']);
-
 
 Route::get('/users/{user_id}/rents', [RentController::class, 'getUserRents']);
 
@@ -50,6 +43,7 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 Route::put('rents/{id}', [RentController::class, 'update']);
 Route::put('users/{id}', [UserController::class, 'update']);
 
+Route::put('user/profile', [UserController::class, 'update']);
 
 Route::get('roles', [RoleController::class, 'index']);
 
@@ -64,9 +58,7 @@ Route::get('/users/{user_id}/archives', [EmployersController::class, 'getUserArc
 Route::put('invites/{id}/update-status', [EmployersController::class, 'updateStatus']);
 Route::post('saved', [EmployersController::class, 'save']);
 Route::get('/forlater/{employers_user_id}', [EmployersController::class, 'forlater']);
-
-Route::get('complete_employer', [UserController::class, 'complete']);
-Route::get('complete_employee', [UserController::class, 'complete']);
+Route::put('employers/{id}/update', [EmployersController::class, 'update']);
 
 Route::get('getUserDetails', [AuthController::class, 'getUserDetails']);
 

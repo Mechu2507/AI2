@@ -34,7 +34,6 @@ class AuthController extends Controller
             'expires_in' => Auth::factory()->getTTL() * 60
         ]);
 
-        //return $this->respondWithToken($token);
     }
 
     public function logout(){
@@ -65,7 +64,17 @@ class AuthController extends Controller
                 'role_id' => $user->role_id,
                 'email' => $user->email,
                 'telephone' => $user->phone,
-
+                'education' => $user->education,
+                'experience' => $user->experience,
+                'interests' => $user->interests,
+                'skills' => $user->skills,
+                'languages' => $user->languages,
+                'portfolio' => $user->portfolio,
+                'successes' => $user->successes,
+                'expected_salary' => $user->expected_salary,
+                'expected_job' => $user->expected_job,
+                'company_name' => $user->company_name,
+                'company_address' => $user->company_address,
             ]
         ]);
     }
