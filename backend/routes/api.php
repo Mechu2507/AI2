@@ -27,21 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('signup', [UserController::class, 'signup']);
 
-Route::get('users', [UserController::class, 'index']);
-
-Route::put('/user/{user_id}', [UserController::class, 'updateProfile']);
-
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
-
-Route::put('users/{id}', [UserController::class, 'update']);
-
-Route::put('user/profile', [UserController::class, 'update']);
-
 Route::get('roles', [RoleController::class, 'index']);
 
 Route::get('employees', [EmployeesController::class, 'index']);
-
 Route::get('employers', [EmployersController::class, 'index']);
+
 Route::get('employers/{id}', [EmployersController::class, 'show']);
 
 Route::post('invites', [EmployersController::class, 'store']);
@@ -50,8 +40,10 @@ Route::get('/users/{user_id}/archives', [EmployersController::class, 'getUserArc
 Route::put('invites/{id}/update-status', [EmployersController::class, 'updateStatus']);
 Route::post('saved', [EmployersController::class, 'save']);
 Route::get('/forlater/{employers_user_id}', [EmployersController::class, 'forlater']);
+
 Route::put('employers/{id}/update', [EmployersController::class, 'update']);
 Route::put('employees/{id}/update', [EmployeesController::class, 'update']);
+
 Route::get('/getInvites/{id}', [EmployeesController::class, 'getInvites']);
 
 Route::get('getUserDetails', [AuthController::class, 'getUserDetails']);

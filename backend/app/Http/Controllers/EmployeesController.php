@@ -47,31 +47,6 @@ class EmployeesController extends Controller
         return response()->json(['success' => true, 'data' => $invite], 201);
     }
 
-    // public function getUserInvites($employers_user_id)
-    // {
-    //     $invitations = Invitation::with(['employer', 'status'])
-    //                           ->where('employers_user_id', $employers_user_id)
-    //                           ->whereHas('status', function($query) {
-    //                               $query->where('id', 1);
-    //                           })
-    //                           ->get();
-
-    //     $employerDetails = $invitations->map(function($invitation) {
-    //         $employer = $invitation->employer;
-    //         return [
-    //             'company_name' => $employer->company_name,
-    //             'telephone' => $employer->telephone,
-    //             'email' => $employer->email,
-    //             'industry' => $employer->industry,
-    //             'location' => $employer->location,
-    //             'call_date' => $invitation->call_date,
-    //             'status' => $invitation->status->status
-    //         ];
-    //     });
-
-    //     return response()->json(['success' => true, 'data' => $employerDetails]);
-    // }
-
     public function getUserArchives($employers_user_id)
     {
         $invitations = Invitation::with(['employer', 'status'])
