@@ -115,9 +115,9 @@ function Profile() {
                         <Tbody>
                             {isForbidden ? (
                                 <Tr>
-                                    <Td colSpan={4}>
-                                        <Text align="center">
-                                            {t("profile.forbidden")}
+                                    <Td colSpan={4} style={{ backgroundColor: "red"}}>
+                                        <Text align="center" textColor="white">
+                                            Acces Denied
                                         </Text>
                                     </Td>
                                 </Tr>

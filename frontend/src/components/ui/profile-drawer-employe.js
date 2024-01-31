@@ -54,7 +54,6 @@ function ProfileDrawer() {
         })
         .then((response) => {
           setUserId(response.data.user.id);
-          console.log(response.data.user);
             if (response.data && response.data.user) {
                 setFormData({
                     firstname: response.data.user.firstname || "",

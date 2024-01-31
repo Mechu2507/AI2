@@ -199,6 +199,10 @@ class EmployeesController extends Controller
 
     public function getInvites($employees_user_id)
     {
+        if(Auth::payload()->get('role') == 2){
+            abort(403, 'Unauthorized action.');
+        }
+
         $invitations = Invitation::with(['employer', 'status'])
                               ->where('employees_user_id', $employees_user_id)
                               ->get();
