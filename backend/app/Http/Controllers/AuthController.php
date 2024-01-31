@@ -75,6 +75,7 @@ class AuthController extends Controller
                 'expected_job' => $user->expected_job,
                 'company_name' => $user->company_name,
                 'company_address' => $user->company_address,
+                'photo' => $user->photo,
             ]
         ]);
     }

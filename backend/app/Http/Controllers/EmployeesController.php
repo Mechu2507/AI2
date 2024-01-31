@@ -47,30 +47,30 @@ class EmployeesController extends Controller
         return response()->json(['success' => true, 'data' => $invite], 201);
     }
 
-    public function getUserInvites($employers_user_id)
-    {
-        $invitations = Invitation::with(['employer', 'status'])
-                              ->where('employers_user_id', $employers_user_id)
-                              ->whereHas('status', function($query) {
-                                  $query->where('id', 1);
-                              })
-                              ->get();
+    // public function getUserInvites($employers_user_id)
+    // {
+    //     $invitations = Invitation::with(['employer', 'status'])
+    //                           ->where('employers_user_id', $employers_user_id)
+    //                           ->whereHas('status', function($query) {
+    //                               $query->where('id', 1);
+    //                           })
+    //                           ->get();
 
-        $employerDetails = $invitations->map(function($invitation) {
-            $employer = $invitation->employer;
-            return [
-                'company_name' => $employer->company_name,
-                'telephone' => $employer->telephone,
-                'email' => $employer->email,
-                'industry' => $employer->industry,
-                'location' => $employer->location,
-                'call_date' => $invitation->call_date,
-                'status' => $invitation->status->status
-            ];
-        });
+    //     $employerDetails = $invitations->map(function($invitation) {
+    //         $employer = $invitation->employer;
+    //         return [
+    //             'company_name' => $employer->company_name,
+    //             'telephone' => $employer->telephone,
+    //             'email' => $employer->email,
+    //             'industry' => $employer->industry,
+    //             'location' => $employer->location,
+    //             'call_date' => $invitation->call_date,
+    //             'status' => $invitation->status->status
+    //         ];
+    //     });
 
-        return response()->json(['success' => true, 'data' => $employerDetails]);
-    }
+    //     return response()->json(['success' => true, 'data' => $employerDetails]);
+    // }
 
     public function getUserArchives($employers_user_id)
     {
@@ -195,5 +195,24 @@ class EmployeesController extends Controller
         ]);
 
         return response()->json(['success' => true, 'message' => 'Profile updated successfully', 'data' => $user]);
+    }
+
+    public function getInvites($employees_user_id)
+    {
+        $invitations = Invitation::with(['employer', 'status'])
+                              ->where('employees_user_id', $employees_user_id)
+                              ->get();
+
+        $employerDetails = $invitations->map(function($invitation) {
+            $employer = $invitation->employer;
+            return [
+                'company_name' => $employer->company_name,
+                'company_address' => $employer->company_address,
+                'call_date' => $invitation->call_date,
+                'status' => $invitation->status->status
+            ];
+        });
+
+        return response()->json(['success' => true, 'data' => $employerDetails]);
     }
 }

@@ -120,7 +120,9 @@
     "emptyArchive": "Brak archiwalnych zaproszeń",
     "saveForLater": "Zapisz na później",
     "forLater": "Zapisane na później",
-    "emptyForLater": "Brak zapisanych na później zaproszeń"
+    "emptyForLater": "Brak zapisanych na później zaproszeń",
+    "invites": "Zaproszenia",
+    "no_invites": "Brak zaproszeń"
 
   },
   "form": {

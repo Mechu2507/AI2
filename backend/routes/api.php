@@ -52,6 +52,7 @@ Route::post('saved', [EmployersController::class, 'save']);
 Route::get('/forlater/{employers_user_id}', [EmployersController::class, 'forlater']);
 Route::put('employers/{id}/update', [EmployersController::class, 'update']);
 Route::put('employees/{id}/update', [EmployeesController::class, 'update']);
+Route::get('/getInvites/{id}', [EmployeesController::class, 'getInvites']);
 
 Route::get('getUserDetails', [AuthController::class, 'getUserDetails']);
 

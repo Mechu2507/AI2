@@ -27,39 +27,60 @@ import EmployeeCard from "../components/ui/employee-card";
 
 function Profile() {
   const { t } = useTranslation();
-  const user_id = localStorage.getItem("id");
   const [invites, setInvites] = useState([]);
-  const [archives, setArchives] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [user_id, setUser_id] = useState(0);
+  const [isForbidden, setIsForbidden] = useState(false);
+  const [sortOrder, setSortOrder] = useState("asc");
 
-  const updateInviteStatus = (inviteid, statusId) => {
-      axios
-          .put(`http://127.0.0.1:8000/api/invites/${inviteid}/update-status`, {status_id: statusId})
-          .then((response) => {
-                  console.log(response, t("profile.inviteStatusUpdated"));
-                  window.location.reload();
-              })
-          .catch((error) => {
-                  console.log(error, t("profile.inviteStatusNotUpdated"));
-          });
+    useEffect(() => {
+        axios
+            .get(`http://127.0.0.1:8000/api/getUserDetails`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
+            .then((response) => {
+                if (response.data && response.data.user) {
+                    setUser_id(response.data.user.id);
+                }
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+    }, []);
 
+    useEffect(() => {
+        if (user_id) {
+            axios
+                .get(`http://127.0.0.1:8000/api/getInvites/${user_id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                })
+                .then((response) => {
+                    setInvites(response.data.data);
+                    setIsForbidden(false);
+                })
+                .catch((error) => {
+                    if (error.response && error.response.status === 403) {
+                        setIsForbidden(true);
+                    }
+                });
+                }
+    }, [user_id]);
+
+  const handlesortByStatus = () => {
+      const sortedData = [...invites].sort((a, b) => {
+          if (sortOrder === "asc") {
+              return a.status.localeCompare(b.status);
+          } else {
+              return b.status.localeCompare(a.status);
+          }
+      });
+        setInvites(sortedData);
+        setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   }
-
-  useEffect(() => {
-      axios
-          .get(`http://127.0.0.1:8000/api/users/${user_id}/invites`)
-          .then((response) => {
-              setInvites(response.data.data);
-          });
-  }, []);
-
-  const PER_PAGE = 3;
-  const offset = currentPage * PER_PAGE;
-  const currentPageData = users
-        .slice(offset, offset + PER_PAGE)
-        .map((user) => <EmployeeCard key={user.id} props={user} />);
-
 
   return (
     <>
@@ -72,55 +93,58 @@ function Profile() {
         <VStack>
           <Box w={"90%"}>
             <HStack>
-              <Heading size={["lg", "xl"]}>{t("profile.heading")}</Heading>
+              <Heading size={["lg", "xl"]}>{t("profile.invites")}</Heading>
               <Spacer />
               <ProfileDrawer />
             </HStack>
             <Divider my={5} />
 
             <TableContainer>
-                            <Table variant="striped" size={["md", "md", "lg"]}>
-                                <Thead>
-                                    <Tr>
-                                        <Th>{t("Nazwa Firmy")}</Th>
-                                        <Th>{t("profile.telephone")}</Th>
-                                        <Th>{t("profile.email")}</Th>
-                                        <Th>{t("profile.callDate2")}</Th>
-                                        <Th>{t("profile.status")}</Th>
-                                        <Th>{t("profile.action")}</Th>
-                                    </Tr>
-                                </Thead>
-                                {invites.length === 0 ? (
-                                    <Tbody>
-                                        
-                                    <Tr>
-                                        <Td>
-                                            <Link href={``}>
-                                            {t("Microsoft")}
-                                            </Link>
-                                        </Td>
-                                        <Td>{t("+48100222000")}</Td>
-                                        <Td>{t("microsoft@gmail.com")}</Td>
-                                        <Td>{t("31.01.2024")}</Td>
-                                        <Td>{t("Oczekuje")}</Td>
-                                        <Td>
-                                            
-                                        </Td>
-                                    </Tr>
-                                
-                            </Tbody>
-                                ) : (
-                                    
-                                    <Tbody>
-                                    <Tr>
-                                        <Td colSpan={7}>
-                                            <Text textAlign="center">{t("profile.noData")}</Text>
-                                        </Td>
-                                    </Tr>
-                                </Tbody>
-                                )}
-                            </Table>
-                        </TableContainer>
+                <Table variant="striped" size={["md", "md", "lg"]}>
+                    <Thead>
+                        <Tr>
+                            <Th>{t("profile.company_name")}</Th>
+                            <Th>{t("profile.company_address")}</Th>
+                            <Th>{t("profile.callDate2")}</Th>
+                            <Th onClick={handlesortByStatus} cursor="pointer">
+                                {t("profile.status")} {sortOrder === "asc" ? "↓" : "↑"}
+                            </Th>
+                        </Tr>
+                    </Thead>
+                    {invites.length === 0 ? (
+                        <Tbody>
+                            {isForbidden ? (
+                                <Tr>
+                                    <Td colSpan={4}>
+                                        <Text align="center">
+                                            {t("profile.forbidden")}
+                                        </Text>
+                                    </Td>
+                                </Tr>
+                            ) : (
+                                <Tr>
+                                    <Td colSpan={4}>
+                                        <Text align="center">
+                                            {t("profile.no_invites")}
+                                        </Text>
+                                    </Td>
+                                </Tr>
+                            )}
+                        </Tbody>
+                    ) : (
+                        <Tbody>
+                            {invites.map((invite) => (
+                                <Tr key={invite.id}>
+                                    <Td>{invite.company_name}</Td>
+                                    <Td>{invite.company_address}</Td>
+                                    <Td>{invite.call_date}</Td>
+                                    <Td>{invite.status}</Td>
+                                </Tr>
+                            ))}
+                        </Tbody>
+                    )}
+                </Table>
+            </TableContainer>
           </Box>
         </VStack>
       </Container>
