@@ -4,7 +4,6 @@ import SignUp from "./pages/SignUpPage";
 import Login from "./pages/LoginPage";
 import Home from "./pages/HomePage";
 import Profile from "./pages/ProfilePage";
-import Dashboard from "./pages/DashboardPage";
 import NotFound from "./pages/Page404";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import useAuthentication from "./useAuthentication";
@@ -26,7 +25,6 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />}/>
-        <Route path="dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
         <Route path="employers" element={<EmployersView />} />
         <Route path="employers/:id" element={<EmployerDetail />} />
