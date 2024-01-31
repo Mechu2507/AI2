@@ -29,18 +29,10 @@ Route::post('signup', [UserController::class, 'signup']);
 
 Route::get('users', [UserController::class, 'index']);
 
-Route::get('rents', [RentController::class, 'index']);
-
-Route::post('rents', [RentController::class, 'store']);
-
-Route::get('/users/{user_id}/rents', [RentController::class, 'getUserRents']);
-
 Route::put('/user/{user_id}', [UserController::class, 'updateProfile']);
 
-Route::delete('/rents/{id}', [RentController::class, 'destroy']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
-Route::put('rents/{id}', [RentController::class, 'update']);
 Route::put('users/{id}', [UserController::class, 'update']);
 
 Route::put('user/profile', [UserController::class, 'update']);
@@ -59,6 +51,7 @@ Route::put('invites/{id}/update-status', [EmployersController::class, 'updateSta
 Route::post('saved', [EmployersController::class, 'save']);
 Route::get('/forlater/{employers_user_id}', [EmployersController::class, 'forlater']);
 Route::put('employers/{id}/update', [EmployersController::class, 'update']);
+Route::put('employees/{id}/update', [EmployeesController::class, 'update']);
 
 Route::get('getUserDetails', [AuthController::class, 'getUserDetails']);
 
@@ -70,5 +63,4 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
-    
 });

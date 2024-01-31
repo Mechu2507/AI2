@@ -105,10 +105,8 @@ class UserController extends Controller
             'expected_salary' => $request->expected_salary,
             'expected_job' => $request->expected_job,
             'photo' => $request->photo,
-
-
-
         ]);
+        
         $user = User::find($user_id);
         return response()->json(['success' => true, 'message' => 'Profile updated successfully', 'data' => $user]);
 

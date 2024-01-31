@@ -37,7 +37,10 @@ class EmployersController extends Controller
 
     public function store(Request $request)
     {
-        
+        if(Auth::payload()->get('role') == 1){
+            abort(403, 'Unauthorized action.');
+        }
+
         $invite = DB::table('invitations')->insert([
             'employees_user_id' => $request->input('employees_user_id'),
             'employers_user_id' => $request->input('employers_user_id'),
@@ -131,6 +134,10 @@ class EmployersController extends Controller
 
     public function save(Request $request)
     {
+        if(Auth::payload()->get('role') == 1){
+            abort(403, 'Unauthorized action.');
+        }
+
         $validatedData = $request->validate([
             'employees_user_id' => 'required',
             'employers_user_id' => 'required',

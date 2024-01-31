@@ -6,9 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\Save;
+use Illuminate\Support\Facades\Auth;
+
 
 class EmployeesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['']]);
+    }
 
     public function index()
     {
@@ -135,5 +142,58 @@ class EmployeesController extends Controller
     });
 
     return response()->json(['success' => true, 'data' => $savedEmployees]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        if(Auth::payload()->get('role') == 2){
+            abort(403, 'Unauthorized action.');
+        }
+
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'firstname' => 'required|min:2|max:20',
+            'lastname' => 'required|min:2|max:20',
+            'telephone' => 'regex:/^[0-9]{9,12}$/',
+            'company_name' => 'max:50',
+            'company_address' => 'max:50',
+            'education' => 'max:50',
+            'experience' => 'max:2000',
+            'interests' => 'max:200',
+            'skills' => 'max:2000',
+            'languages' => 'max:50',
+            'portfolio' => 'max:2000',
+            'successes' => 'max:50',
+            'expected_salary' => 'numeric',
+            'expected_job' => 'max:50',
+            'photo' => 'max:200',
+
+        ]);
+
+        DB::table('users')->where('id', $id)->update([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'telephone' => $request->telephone,
+            'company_name' => $request->company_name,
+            'company_address' => $request->company_address,
+            'education' => $request->education,
+            'experience' => $request->experience,
+            'interests' => $request->interests,
+            'skills' => $request->skills,
+            'languages' => $request->languages,
+            'portfolio' => $request->portfolio,
+            'successes' => $request->successes,
+            'expected_salary' => $request->expected_salary,
+            'expected_job' => $request->expected_job,
+            'photo' => $request->photo,
+        ]);
+
+        return response()->json([
+            'data' => $user,
+            'message' => 'User updated successfully',
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Profile updated successfully', 'data' => $user]);
     }
 }

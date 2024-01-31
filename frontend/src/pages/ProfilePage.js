@@ -60,7 +60,7 @@ function Profile() {
         .slice(offset, offset + PER_PAGE)
         .map((user) => <EmployeeCard key={user.id} props={user} />);
 
-  
+
   return (
     <>
       <Navbar

@@ -63,7 +63,7 @@ class AuthController extends Controller
                 'lastname'=> $user->lastname,
                 'role_id' => $user->role_id,
                 'email' => $user->email,
-                'telephone' => $user->phone,
+                'telephone' => $user->telephone,
                 'education' => $user->education,
                 'experience' => $user->experience,
                 'interests' => $user->interests,

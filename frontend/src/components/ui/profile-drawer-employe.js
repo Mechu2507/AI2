@@ -24,7 +24,7 @@ function ProfileDrawer() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
-  const user_id = localStorage.getItem("id");
+  const [user_id, setUserId] = useState({});
 
   const [formData, setFormData] = useState({
     firstname: "",
@@ -45,61 +45,79 @@ function ProfileDrawer() {
   });
 
   useEffect(() => {
-    setFormData({
-      firstname: localStorage.getItem("firstname") === "null" ? "" : localStorage.getItem("firstname") || "",
-      lastname: localStorage.getItem("lastname") === "null" ? "" : localStorage.getItem("lastname") || "",
-      telephone: localStorage.getItem("telephone") === "null" ? "" : localStorage.getItem("telephone") || "",
-      education: localStorage.getItem("education") === "null" ? "" : localStorage.getItem("education") || "",
-      experience: localStorage.getItem("experience") === "null" ? "" : localStorage.getItem("experience") || "",
-      interests: localStorage.getItem("interests") === "null" ? "" : localStorage.getItem("interests") || "",
-      skills: localStorage.getItem("skills") === "null" ? "" : localStorage.getItem("skills") || "",
-      languages: localStorage.getItem("languages") === "null" ? "" : localStorage.getItem("languages") || "",
-      portfolio: localStorage.getItem("portfolio") === "null" ? "" : localStorage.getItem("portfolio") || "",
-      successes: localStorage.getItem("successes") === "null" ? "" : localStorage.getItem("successes") || "",
-      expected_salary: localStorage.getItem("expected_salary") === "null" ? "" : localStorage.getItem("expected_salary") || "",
-      expected_job: localStorage.getItem("expected_job") === "null" ? "" : localStorage.getItem("expected_job") || "",
-      photo: localStorage.getItem("photo") === "null" ? "" : localStorage.getItem("photo") || "",
-    });
-  }, []);
+    const token = localStorage.getItem("token");
+
+    axios.get(`http://127.0.0.1:8000/api/getUserDetails/`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        })
+        .then((response) => {
+          setUserId(response.data.user.id);
+          console.log(response.data.user);
+            if (response.data && response.data.user) {
+                setFormData({
+                    firstname: response.data.user.firstname || "",
+                    lastname: response.data.user.lastname || "",
+                    telephone: response.data.user.telephone || "",
+                    education: response.data.user.education || "",
+                    experience: response.data.user.experience || "",
+                    interests: response.data.user.interests || "",
+                    skills: response.data.user.skills || "",
+                    languages: response.data.user.languages || "",
+                    portfolio: response.data.user.portfolio || "",
+                    successes: response.data.user.successes || "",
+                    expected_salary: response.data.user.expected_salary || "",
+                    expected_job: response.data.user.expected_job || "",
+                    photo: response.data.user.photo || "",
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching user data", error);
+        });
+    }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = () => {
-    axios
-      .put(`http://127.0.0.1:8000/api/user/${user_id}`, formData)
-      .then((response) => {
-        const updatedUser = response.data.data;
-        if (updatedUser) {
-          showToast(
-            toast,
-            "Dane zostały pomyślnie zaktualizowane.",
-            "success",
-            "Success"
-          );
-          localStorage.setItem("firstname", updatedUser.firstname);
-          localStorage.setItem("lastname", updatedUser.lastname);
-          localStorage.setItem("telephone", updatedUser.telephone);
-          localStorage.setItem("education", updatedUser.education);
-          localStorage.setItem("experience", updatedUser.experience);
-          localStorage.setItem("interests", updatedUser.interests);
-          localStorage.setItem("skills", updatedUser.skills);
-          localStorage.setItem("languages", updatedUser.languages);
-          localStorage.setItem("portfolio", updatedUser.portfolio);
-          localStorage.setItem("successes", updatedUser.successes);
-          localStorage.setItem("expected_salary", updatedUser.expected_salary);
-          localStorage.setItem("expected_job", updatedUser.expected_job);
-          localStorage.setItem("photo", updatedUser.photo);
+    const token = localStorage.getItem("token");
 
+    axios.put(`http://127.0.0.1:8000/api/employees/${user_id}/update`, formData, {
+      headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            })
+            .then((response) => {
+                showToast(
+                    toast,
+                    "Dane zostały pomyślnie zaktualizowane.",
+                    "success",
+                    "Success"
+                );
 
-          onClose();
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+                setFormData({
+                    firstname: response.data.firstname,
+                    lastname: response.data.lastname,
+                    telephone: response.data.telephone,
+                    education: response.data.education,
+                    experience: response.data.experience,
+                    interests: response.data.interests,
+                    skills: response.data.skills,
+                    languages: response.data.languages,
+                    portfolio: response.data.portfolio,
+                    successes: response.data.successes,
+                    expected_salary: response.data.expected_salary,
+                    expected_job: response.data.expected_job,
+                    photo: response.data.photo,
+                });
+            })
+            .catch((error) => {
+                console.error("Error updating user data", error);
+            });
+    }
 
   return (
     <>
