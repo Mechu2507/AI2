@@ -23,8 +23,8 @@ class EmployersController extends Controller
 
         $users = User::where('role_id', 1)->get();
 
-        return response()->json(['success' => true, 'data' => $users], 200);    
-        
+        return response()->json(['success' => true, 'data' => $users], 200);
+
     }
 
     public function show($id)
@@ -47,7 +47,7 @@ class EmployersController extends Controller
             'status_id' => $request->input('status_id'),
             'call_date' => $request->input('call_date')
         ]);
-        
+
         return response()->json(['success' => true, 'data' => $invite], 201);
     }
 
@@ -68,7 +68,7 @@ class EmployersController extends Controller
             $employee = $invitation->employee;
             return [
                 'id' => $invitation->id,
-                'user_id' => $employee->id, 
+                'user_id' => $employee->id,
                 'firstname' => $employee->firstname,
                 'lastname' => $employee->lastname,
                 'telephone' => $employee->telephone,
@@ -158,7 +158,7 @@ class EmployersController extends Controller
                 ->get();
 
     $savedEmployees = $saves->map(function($save) {
-        return $save->employee; 
+        return $save->employee;
     });
 
     return response()->json(['success' => true, 'data' => $savedEmployees]);
