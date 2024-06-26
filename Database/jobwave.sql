@@ -29,6 +29,8 @@ create table users (
     photo varchar(200) null,
     company_name varchar(50) null,
     company_address varchar(50) null,
+    updated_at date null,
+    created_at date null,
     primary key (id),
     foreign key (role_id) references roles(id)
 );
